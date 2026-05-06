@@ -6,177 +6,171 @@
 <title>TASSIO</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Noto+Serif+JP:wght@300;400;700&display=swap');
-
-:root {
-  --sand: #f0ead8; --parchment: #e8dfc8; --dust: #d4c9a8;
-  --terra: #8b5e3c; --terradark: #5c3a1e;
-  --ink: #1a1410; --inkdim: #6b5a4a; --inkfaint: #b0a090;
-  --accent: #c4763a; --accentdim: #e8c49a; --green: #4a7c59;
-  --serif: 'Cormorant Garamond','Noto Serif JP',serif;
-  --mono: 'DM Mono',monospace;
+:root{
+  --sand:#f0ead8;--dust:#d4c9a8;--terra:#8b5e3c;--terradark:#5c3a1e;
+  --ink:#1a1410;--inkdim:#6b5a4a;--inkfaint:#b0a090;
+  --accent:#c4763a;--accentdim:#e8c49a;--green:#4a7c59;
+  --serif:'Cormorant Garamond','Noto Serif JP',serif;
+  --mono:'DM Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--sand);color:var(--ink);font-family:var(--serif);min-height:100vh;position:relative;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(ellipse at 20% 20%,rgba(196,118,58,0.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(139,94,60,0.05) 0%,transparent 60%);pointer-events:none;z-index:0}
+body{background:var(--sand);color:var(--ink);font-family:var(--serif);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(196,118,58,0.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(139,94,60,0.05) 0%,transparent 60%);pointer-events:none;z-index:0}
 body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(139,94,60,0.05) 1px,transparent 1px);background-size:100% 48px;pointer-events:none;z-index:0}
-.container{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:48px 24px 80px}
+.wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:48px 24px 80px}
 
-header{text-align:center;margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--dust)}
+/* ヘッダー */
+header{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--dust)}
 .logo{font-family:var(--mono);font-size:11px;letter-spacing:6px;color:var(--inkfaint);margin-bottom:8px}
 header h1{font-family:var(--serif);font-size:52px;font-weight:300;letter-spacing:12px;color:var(--terradark);line-height:1;margin-bottom:10px}
 header h1 em{font-style:italic;color:var(--accent)}
-.tagline{font-size:13px;color:var(--inkdim);font-style:italic;letter-spacing:1px}
+.tagline{font-size:13px;color:var(--inkdim);font-style:italic}
 
-.api-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);border:1px solid var(--dust);border-radius:4px;padding:12px 16px;margin-bottom:32px}
+/* APIキー */
+.api-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);border:1px solid var(--dust);border-radius:4px;padding:12px 16px;margin-bottom:28px}
 .api-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--inkfaint);white-space:nowrap}
-.api-input{flex:1;background:transparent;border:none;border-bottom:1px solid var(--dust);padding:4px 0;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none;transition:border-color 0.2s}
+.api-input{flex:1;background:transparent;border:none;border-bottom:1px solid var(--dust);padding:4px 0;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .2s}
 .api-input:focus{border-color:var(--accent)}
-.api-dot{width:7px;height:7px;border-radius:50%;background:var(--dust);transition:all 0.3s;flex-shrink:0}
-.api-dot.ok{background:var(--green);box-shadow:0 0 6px rgba(74,124,89,0.4)}
+.api-dot{width:7px;height:7px;border-radius:50%;background:var(--dust);transition:all .3s;flex-shrink:0}
+.api-dot.ok{background:var(--green);box-shadow:0 0 6px rgba(74,124,89,.4)}
 
-.mode-tabs{display:flex;margin-bottom:28px;border:1px solid var(--dust);border-radius:4px;overflow:hidden;background:rgba(255,255,255,0.3)}
-.mode-tab{flex:1;padding:14px 12px;text-align:center;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:1px;color:var(--inkdim);border:none;background:transparent;transition:all 0.2s;border-right:1px solid var(--dust);line-height:1.4}
-.mode-tab:last-child{border-right:none}
-.mode-tab.active{background:var(--terradark);color:var(--sand)}
-.mode-tab .tab-num{display:block;font-size:9px;opacity:0.6;margin-bottom:3px}
-.mode-panel{display:none}
-.mode-panel.active{display:block}
+/* ステップ表示 */
+.steps{display:flex;gap:0;margin-bottom:28px;border:1px solid var(--dust);border-radius:4px;overflow:hidden}
+.step{flex:1;padding:14px 10px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--inkfaint);border-right:1px solid var(--dust);line-height:1.5;transition:all .2s;position:relative}
+.step:last-child{border-right:none}
+.step.active{background:var(--terradark);color:var(--sand)}
+.step.done{background:rgba(74,124,89,.12);color:var(--green)}
+.step-num{display:block;font-size:9px;opacity:.6;margin-bottom:3px}
+.step-label{display:block}
 
-.card{background:rgba(255,255,255,0.5);border:1px solid var(--dust);border-radius:4px;padding:24px;margin-bottom:20px}
-.card-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--inkfaint);text-transform:uppercase;margin-bottom:14px}
+/* カード */
+.card{background:rgba(255,255,255,.5);border:1px solid var(--dust);border-radius:4px;padding:24px;margin-bottom:20px}
+.card-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--inkfaint);text-transform:uppercase;margin-bottom:16px}
 
-.drop-zone{border:2px dashed var(--dust);border-radius:4px;padding:36px 24px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px;position:relative}
-.drop-zone:hover,.drop-zone.drag-over{border-color:var(--accent);background:rgba(196,118,58,0.04)}
-.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.drop-icon{font-size:26px;margin-bottom:8px;display:block}
-.drop-zone h3{font-family:var(--serif);font-weight:400;font-size:15px;color:var(--terradark);margin-bottom:4px}
-.drop-zone p{font-family:var(--mono);font-size:11px;color:var(--inkfaint)}
+/* 番組表示（固定） */
+.show-card{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(92,58,30,.06);border:1px solid var(--accentdim);border-radius:4px;margin-bottom:20px}
+.show-icon{font-size:32px;flex-shrink:0}
+.show-name{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--terradark)}
+.show-meta{font-family:var(--mono);font-size:11px;color:var(--inkfaint);margin-top:3px}
+.show-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;background:var(--terradark);color:var(--sand);padding:3px 8px;border-radius:2px;margin-left:auto;white-space:nowrap}
 
-.divider{text-align:center;font-family:var(--mono);font-size:10px;color:var(--inkfaint);letter-spacing:3px;margin:12px 0}
-.text-input{width:100%;background:rgba(255,255,255,0.6);border:1px solid var(--dust);border-radius:4px;padding:14px;color:var(--ink);font-family:var(--serif);font-size:14px;line-height:1.7;outline:none;resize:vertical;min-height:120px;transition:border-color 0.2s}
-.text-input:focus{border-color:var(--accent)}
-.text-input::placeholder{color:var(--inkfaint);font-style:italic}
+/* エピソードリスト */
+.ep-list{display:grid;gap:6px;max-height:420px;overflow-y:auto;padding-right:4px}
+.ep-list::-webkit-scrollbar{width:3px}
+.ep-list::-webkit-scrollbar-thumb{background:var(--dust)}
+.ep-item{display:flex;align-items:baseline;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:3px;cursor:pointer;transition:all .15s}
+.ep-item:hover{background:rgba(196,118,58,.07);border-color:var(--accentdim)}
+.ep-item.selected{background:rgba(92,58,30,.08);border-color:var(--terra)}
+.ep-num{font-family:var(--mono);font-size:10px;color:var(--accent);min-width:36px;flex-shrink:0}
+.ep-title{font-size:14px;color:var(--ink);line-height:1.5;flex:1}
+.ep-date{font-family:var(--mono);font-size:10px;color:var(--inkfaint);white-space:nowrap}
 
-.url-input{width:100%;background:rgba(255,255,255,0.6);border:1px solid var(--dust);border-radius:4px;padding:10px 14px;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none;transition:border-color 0.2s;margin-bottom:16px}
-.url-input:focus{border-color:var(--accent)}
-.url-input::placeholder{color:var(--inkfaint)}
+/* ローディングスピナー */
+.spin-wrap{text-align:center;padding:32px;display:none}
+.spin-wrap.show{display:block}
+.spin-title{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--terradark);margin-bottom:8px}
+.spin-sub{font-family:var(--mono);font-size:10px;color:var(--inkfaint);letter-spacing:2px}
+.dots{display:flex;justify-content:center;gap:8px;margin:16px 0}
+.dots span{width:6px;height:6px;border-radius:50%;background:var(--terra);animation:ld 1.4s infinite}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes ld{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-8px);opacity:1}}
 
-.file-loaded{background:rgba(74,124,89,0.08);border:1px solid rgba(74,124,89,0.3);border-radius:4px;padding:10px 14px;font-family:var(--mono);font-size:12px;color:var(--green);margin-bottom:14px;display:none}
-.file-loaded.show{display:block}
+/* 選択エピソード確認 */
+.selected-ep{background:rgba(92,58,30,.06);border:1px solid var(--accentdim);border-radius:4px;padding:14px 16px;margin-bottom:16px;display:none}
+.selected-ep.show{display:block}
+.sel-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:6px}
+.sel-title{font-family:var(--serif);font-size:16px;color:var(--terradark)}
 
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:1px;cursor:pointer;border:1px solid;transition:all 0.2s;white-space:nowrap}
+/* ボタン */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:1px;cursor:pointer;border:1px solid;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--terradark);color:var(--sand);border-color:var(--terradark)}
-.btn-primary:hover{background:var(--terra);border-color:var(--terra)}
+.btn-primary:hover{background:var(--terra)}
 .btn-primary:disabled{background:var(--dust);border-color:var(--dust);color:var(--inkfaint);cursor:not-allowed}
 .btn-outline{background:transparent;color:var(--terradark);border-color:var(--terra)}
-.btn-outline:hover{background:rgba(139,94,60,0.06)}
-.btn-outline:disabled{color:var(--inkfaint);border-color:var(--dust);cursor:not-allowed}
-.btn-danger{background:transparent;color:#a03020;border-color:#c08070;display:none}
-.btn-danger:hover{background:rgba(160,48,32,0.06)}
-.btn-danger.show{display:inline-flex}
+.btn-outline:hover{background:rgba(139,94,60,.06)}
+.btn-ghost{background:transparent;color:var(--inkdim);border-color:var(--dust);font-size:10px;padding:8px 16px}
+.btn-ghost:hover{border-color:var(--terra);color:var(--terra)}
 .btn-pdf{background:var(--accent);color:white;border-color:var(--accent)}
-.btn-pdf:hover{background:var(--terra);border-color:var(--terra)}
+.btn-pdf:hover{background:var(--terra)}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
 
-.status-line{display:none;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--inkdim);margin-top:12px;padding:8px 0}
-.status-line.show{display:flex}
-.status-pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.2s infinite;flex-shrink:0}
-.status-pulse.done{background:var(--green);animation:none}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+/* エラー */
+.err{background:rgba(160,48,32,.08);border:1px solid rgba(160,48,32,.3);border-radius:4px;padding:12px 16px;font-family:var(--mono);font-size:12px;color:#a03020;display:none}
+.err.show{display:block}
 
-.transcript-wrap{display:none;margin-top:20px}
-.transcript-wrap.show{display:block}
-.transcript-body{background:rgba(255,255,255,0.6);border:1px solid var(--dust);border-radius:4px;padding:16px;font-size:14px;line-height:2;color:var(--ink);max-height:220px;overflow-y:auto;white-space:pre-wrap}
-.transcript-body::-webkit-scrollbar{width:3px}
-.transcript-body::-webkit-scrollbar-thumb{background:var(--dust)}
-
-.error-box{background:rgba(160,48,32,0.08);border:1px solid rgba(160,48,32,0.3);border-radius:4px;padding:12px 16px;font-family:var(--mono);font-size:12px;color:#a03020;margin-top:12px;display:none}
-.error-box.show{display:block}
-.notice{background:rgba(196,118,58,0.07);border:1px solid var(--accentdim);border-radius:4px;padding:12px 16px;font-family:var(--mono);font-size:11px;color:var(--inkdim);line-height:1.7;margin-bottom:20px}
-
-.loading-wrap{text-align:center;padding:40px;display:none}
-.loading-wrap.show{display:block}
-.loading-title{font-family:var(--serif);font-size:18px;font-weight:300;font-style:italic;color:var(--terradark);margin-bottom:8px}
-.loading-sub{font-family:var(--mono);font-size:11px;color:var(--inkfaint);letter-spacing:2px}
-.loading-dots{display:flex;justify-content:center;gap:8px;margin:20px 0}
-.loading-dots span{width:6px;height:6px;border-radius:50%;background:var(--terra);animation:ldots 1.4s infinite}
-.loading-dots span:nth-child(2){animation-delay:0.2s}
-.loading-dots span:nth-child(3){animation-delay:0.4s}
-@keyframes ldots{0%,100%{transform:translateY(0);opacity:0.4}50%{transform:translateY(-8px);opacity:1}}
-
-.results{margin-top:32px;border-top:1px solid var(--dust);padding-top:32px}
-.result-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
-.result-header h2{font-family:var(--serif);font-size:22px;font-weight:300;font-style:italic;color:var(--terradark);flex:1}
-.result-section{margin-bottom:32px;animation:fadeUp 0.5s ease both}
-.result-section:nth-child(2){animation-delay:0.05s}
-.result-section:nth-child(3){animation-delay:0.1s}
-.result-section:nth-child(4){animation-delay:0.15s}
-.result-section:nth-child(5){animation-delay:0.2s}
-.result-section:nth-child(6){animation-delay:0.25s}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.section-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.section-title::after{content:'';flex:1;height:1px;background:var(--dust)}
+/* 結果 */
+.results{margin-top:28px;border-top:1px solid var(--dust);padding-top:28px;display:none}
+.result-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.result-header h2{font-family:var(--serif);font-size:20px;font-weight:300;font-style:italic;color:var(--terradark);flex:1}
+.rsec{margin-bottom:28px;animation:fu .4s ease both}
+.rsec:nth-child(2){animation-delay:.05s}
+.rsec:nth-child(3){animation-delay:.1s}
+.rsec:nth-child(4){animation-delay:.15s}
+.rsec:nth-child(5){animation-delay:.2s}
+.rsec:nth-child(6){animation-delay:.25s}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--dust)}
 .summary-text{font-size:16px;line-height:2;color:var(--ink)}
 
-/* 目次 */
+/* 目次（クリック選択） */
 .toc-list{display:grid;gap:4px}
-.toc-item{display:flex;gap:12px;align-items:baseline;padding:8px 10px;border-radius:3px;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
-.toc-item:hover{background:rgba(196,118,58,0.08);border-color:var(--accentdim)}
-.toc-item.selected{background:rgba(92,58,30,0.08);border-color:var(--terra)}
-.toc-time{font-family:var(--mono);font-size:11px;color:var(--accent);white-space:nowrap;min-width:40px}
-.toc-text{font-size:14px;color:var(--ink);line-height:1.5;flex:1}
-.toc-pick-hint{font-family:var(--mono);font-size:10px;color:var(--inkfaint);letter-spacing:1px;margin-top:8px}
+.toc-item{display:flex;gap:12px;align-items:baseline;padding:8px 10px;border-radius:3px;cursor:pointer;transition:all .15s;border:1px solid transparent}
+.toc-item:hover{background:rgba(196,118,58,.07);border-color:var(--accentdim)}
+.toc-item.sel{background:rgba(92,58,30,.08);border-color:var(--terra)}
+.toc-time{font-family:var(--mono);font-size:11px;color:var(--accent);min-width:40px;flex-shrink:0}
+.toc-text{font-size:14px;color:var(--ink);flex:1}
+.toc-hint{font-family:var(--mono);font-size:10px;color:var(--inkfaint);margin-top:6px}
 
 /* 深掘りパネル */
-.deepdive-panel{background:rgba(255,255,255,0.5);border:1px solid var(--dust);border-radius:4px;padding:20px;margin-top:16px;display:none}
-.deepdive-panel.show{display:block}
-.deepdive-topic{font-family:var(--mono);font-size:11px;color:var(--terra);margin-bottom:14px;letter-spacing:1px}
-.level-select{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.level-btn{padding:7px 16px;border-radius:20px;font-family:var(--mono);font-size:10px;letter-spacing:1px;cursor:pointer;border:1px solid var(--dust);background:transparent;color:var(--inkdim);transition:all 0.15s}
-.level-btn.active{background:var(--terradark);color:var(--sand);border-color:var(--terradark)}
-.level-btn:hover:not(.active){border-color:var(--terra);color:var(--terradark)}
+.dd-panel{background:rgba(255,255,255,.5);border:1px solid var(--dust);border-radius:4px;padding:18px;margin-top:12px;display:none}
+.dd-panel.show{display:block}
+.dd-topic{font-family:var(--mono);font-size:11px;color:var(--terra);margin-bottom:12px}
+.lv-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.lv-btn{padding:6px 14px;border-radius:20px;font-family:var(--mono);font-size:10px;cursor:pointer;border:1px solid var(--dust);background:transparent;color:var(--inkdim);transition:all .15s}
+.lv-btn.act{background:var(--terradark);color:var(--sand);border-color:var(--terradark)}
+.lv-btn:hover:not(.act){border-color:var(--terra);color:var(--terra)}
 
 /* チャート */
-.chart-box{background:rgba(255,255,255,0.6);border:1px solid var(--dust);border-radius:4px;padding:20px;overflow-x:auto}
+.chart-box{background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:20px;overflow-x:auto}
 .mermaid{text-align:center}
 .mermaid svg{max-width:100%}
 
 /* 用語 */
 .term-grid{display:grid;gap:10px}
-.term-item{padding:14px 16px;border-left:2px solid var(--accentdim);background:rgba(255,255,255,0.4)}
+.term-item{padding:12px 16px;border-left:2px solid var(--accentdim);background:rgba(255,255,255,.4)}
 .term-name{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--terra);margin-bottom:5px}
 .term-desc{font-size:14px;line-height:1.8;color:var(--inkdim)}
 
 /* CTA */
-.cta-box{background:var(--terradark);border-radius:6px;padding:32px;text-align:center;margin-top:8px}
-.cta-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:rgba(240,234,216,0.5);margin-bottom:12px}
-.cta-title{font-family:var(--serif);font-size:22px;font-weight:300;font-style:italic;color:var(--sand);margin-bottom:8px;line-height:1.6}
-.cta-sub{font-size:14px;color:rgba(240,234,216,0.65);margin-bottom:24px}
-.cta-link{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:var(--accent);color:white;border-radius:3px;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-decoration:none;transition:all 0.2s}
+.cta-box{background:var(--terradark);border-radius:6px;padding:28px 32px;text-align:center}
+.cta-label{font-family:var(--mono);font-size:10px;letter-spacing:3px;color:rgba(240,234,216,.4);margin-bottom:10px}
+.cta-title{font-family:var(--serif);font-size:20px;font-weight:300;font-style:italic;color:var(--sand);margin-bottom:8px;line-height:1.6}
+.cta-sub{font-size:13px;color:rgba(240,234,216,.65);margin-bottom:20px}
+.cta-link{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:white;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:1px;text-decoration:none;transition:all .2s}
 .cta-link:hover{background:var(--terra)}
-.cta-nurl{font-family:var(--mono);font-size:11px;color:rgba(240,234,216,0.4);margin-top:4px}
 
 /* レポート本文 */
-.report-body{font-size:15px;line-height:2;color:var(--ink)}
-.report-body h3{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--terradark);margin:20px 0 8px}
+.report-body{font-size:15px;line-height:2.1;color:var(--ink)}
+.report-body h3{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--terradark);margin:18px 0 8px}
 .report-body p{margin-bottom:12px}
 
-/* PDF印刷 */
+/* PDF */
 @media print{
   body{background:white!important}
   body::before,body::after{display:none}
-  .container{padding:20px;max-width:100%}
-  header,.api-row,.mode-tabs,#panelHtm,#panelVoice,.loading-wrap,.print-hide{display:none!important}
+  .wrap{padding:20px;max-width:100%}
+  header,.api-row,.steps,.step1-panel,.step2-panel,.print-hide{display:none!important}
   .results{margin-top:0;border-top:none;padding-top:0;display:block!important}
   .cta-box{background:#f5f0e8!important;-webkit-print-color-adjust:exact}
   .cta-link{display:none}
-  .deepdive-panel{border:1px solid #ccc}
-  .result-section{animation:none!important;page-break-inside:avoid}
+  .rsec{animation:none!important}
 }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 
 <header>
   <div class="logo">QQ Series — #039</div>
@@ -184,383 +178,421 @@ header h1 em{font-style:italic;color:var(--accent)}
   <div class="tagline">Transcribe & Archive System for Strategic Information Organization</div>
 </header>
 
+<!-- APIキー -->
 <div class="api-row">
   <span class="api-label">API KEY</span>
   <input type="password" class="api-input" id="apiKey" placeholder="sk-ant-..."/>
   <div class="api-dot" id="apiDot"></div>
 </div>
 
-<div class="mode-tabs">
-  <button class="mode-tab active" onclick="switchMode('Htm')" id="tabHtm">
-    <span class="tab-num">MODE I</span>目次・テキスト解析
-  </button>
-  <button class="mode-tab" onclick="switchMode('Voice')" id="tabVoice">
-    <span class="tab-num">MODE II</span>音声文字起こし
-  </button>
+<!-- ステップインジケーター -->
+<div class="steps">
+  <div class="step active" id="stp1"><span class="step-num">STEP 1</span><span class="step-label">番組を選ぶ</span></div>
+  <div class="step" id="stp2"><span class="step-num">STEP 2</span><span class="step-label">エピソードを選ぶ</span></div>
+  <div class="step" id="stp3"><span class="step-num">STEP 3</span><span class="step-label">TASSIOで解析</span></div>
 </div>
 
-<!-- MODE I -->
-<div class="mode-panel active" id="panelHtm">
-  <div class="notice">Apple PodcastページをHTMとして保存してドロップ、またはエピソードの目次・説明文を貼り付けてください。</div>
+<!-- STEP 1: 番組選択 -->
+<div id="step1Panel">
   <div class="card">
-    <div class="card-label">INPUT</div>
-    <input type="url" class="url-input" id="episodeUrl" placeholder="Apple Podcast エピソードURL（任意）— 「聴く」ボタンのリンクになります"/>
-    <div class="drop-zone" id="dropZone">
-      <input type="file" id="htmFile" accept=".htm,.html,.txt"/>
-      <span class="drop-icon">📄</span>
-      <h3>HTM / HTMLファイルをドロップ</h3>
-      <p>.htm / .html / .txt</p>
+    <div class="card-label">番組</div>
+    <div class="show-card">
+      <div class="show-icon">🎧</div>
+      <div>
+        <div class="show-name">ゆるコンピュータ科学ラジオ</div>
+        <div class="show-meta">堀元見 × 水野太貴 / テクノロジー / 毎週更新</div>
+      </div>
+      <div class="show-badge">v1.0 固定</div>
     </div>
-    <div class="file-loaded" id="fileLoaded"></div>
-    <div class="divider">— または —</div>
-    <textarea class="text-input" id="pasteText" placeholder="エピソードの目次・説明文をここに貼り付け...&#10;&#10;例）&#10;【目次】&#10;0:00 バイブコーディングが大流行&#10;1:09 AIにこき使われて悲しかった&#10;..."></textarea>
-    <div class="btn-row print-hide">
-      <button class="btn btn-primary" id="btnAnalyzeHtm" onclick="analyzeHtm()" disabled>✦ TASSIOで解析</button>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnFetch" onclick="fetchEpisodes()">▶ エピソード一覧を取得</button>
     </div>
-    <div class="error-box" id="htmError"></div>
+    <div class="err" id="fetchErr"></div>
   </div>
 </div>
 
-<!-- MODE II -->
-<div class="mode-panel" id="panelVoice">
-  <div class="notice">音声ファイルをアップロードして再生しながらリアルタイム文字起こし。<strong>Chrome推奨。</strong></div>
+<!-- STEP 2: エピソード選択 -->
+<div id="step2Panel" style="display:none">
   <div class="card">
-    <div class="card-label">AUDIO INPUT</div>
-    <div class="drop-zone" id="dropZoneAudio">
-      <input type="file" id="audioFile" accept="audio/*"/>
-      <span class="drop-icon">🎧</span>
-      <h3>音声ファイルをドロップ</h3>
-      <p>mp3 / m4a / wav / ogg / aac</p>
+    <div class="card-label">エピソードを選んでください</div>
+    <div class="spin-wrap" id="epSpin">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div class="spin-title">エピソード一覧を取得中...</div>
+      <div class="spin-sub">LOADING</div>
     </div>
-    <div class="file-loaded" id="audioLoaded"></div>
-    <audio id="audioPlayer" controls style="width:100%;display:none;margin-bottom:16px;accent-color:var(--accent)"></audio>
-    <div class="btn-row print-hide">
-      <button class="btn btn-primary" id="btnStartVoice" onclick="startRecognition()" disabled>▶ 文字起こし開始</button>
-      <button class="btn btn-danger" id="btnStopVoice" onclick="stopRecognition()">■ 停止</button>
-      <button class="btn btn-outline" id="btnAnalyzeVoice" onclick="analyzeVoice()" disabled>✦ TASSIOで解析</button>
-    </div>
-    <div class="status-line" id="voiceStatus">
-      <div class="status-pulse" id="statusDot"></div>
-      <span id="statusText">待機中</span>
-    </div>
-    <div class="transcript-wrap" id="transcriptWrap">
-      <div class="card-label" style="margin-top:16px">TRANSCRIPT</div>
-      <div class="transcript-body" id="transcriptBody"></div>
-    </div>
-    <div class="error-box" id="voiceError"></div>
+    <div class="ep-list" id="epList"></div>
+    <div class="err" id="epErr"></div>
+  </div>
+  <div class="selected-ep" id="selectedEp">
+    <div class="sel-label">選択中</div>
+    <div class="sel-title" id="selectedTitle"></div>
+  </div>
+  <div class="btn-row print-hide">
+    <button class="btn btn-ghost" onclick="backToStep1()">← 戻る</button>
+    <button class="btn btn-primary" id="btnAnalyze" onclick="analyze()" disabled>✦ TASSIOで解析</button>
   </div>
 </div>
 
-<div class="loading-wrap" id="loadingWrap">
-  <div class="loading-dots"><span></span><span></span><span></span></div>
-  <div class="loading-title">TASSIOが解析中...</div>
-  <div class="loading-sub" id="loadingText">PROCESSING</div>
+<!-- STEP 3: 解析中 -->
+<div class="spin-wrap" id="analyzeSpin">
+  <div class="dots"><span></span><span></span><span></span></div>
+  <div class="spin-title">TASSIOが解析中...</div>
+  <div class="spin-sub" id="analyzeSpinSub">PROCESSING</div>
 </div>
 
-<div class="results" id="results" style="display:none"></div>
+<!-- 結果 -->
+<div class="results" id="results"></div>
 
-</div>
+</div><!-- /wrap -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <script>
 mermaid.initialize({startOnLoad:false,theme:'neutral',themeVariables:{background:'rgba(255,255,255,0.6)',primaryColor:'#e8d5b8',primaryTextColor:'#1a1410',primaryBorderColor:'#d4c9a8',lineColor:'#8b5e3c',secondaryColor:'#f0ead8',fontSize:'13px'}});
 
-let htmContent='',voiceTranscript='',isRecognizing=false,recognition=null;
-let currentTocItems=[],selectedLevel='newspaper',selectedTopicIndex=-1;
-let currentEpisodeTitle='',currentEpisodeUrl='';
+const SHOW_URL = 'https://podcasters.spotify.com/pod/show/yurucom';
+const SHOW_APPLE_BASE = 'https://podcasts.apple.com/jp/podcast/id1604353315';
 
-const LEVELS={
-  simple:{label:'小学生でもわかる',prompt:'小学生でも理解できるよう、身近な例えを使って平易な言葉で'},
-  newspaper:{label:'新聞記事レベル',prompt:'一般の読者向けに新聞記事のようにわかりやすく、必要な背景知識も補足しながら'},
-  expert:{label:'専門家向け',prompt:'専門的な知識を持つ読者向けに、技術的な詳細や背景理論も含めて詳しく'}
+let episodes = [];       // [{title, date, desc, url, appleUrl}]
+let selectedIdx = -1;
+let selectedLevel = 'newspaper';
+let currentToc = [];
+let currentTitle = '';
+let currentAppleUrl = '';
+let ddTopicIdx = -1;
+
+const LEVELS = {
+  simple:    {label:'小学生でもわかる',    prompt:'小学生でも理解できるよう、身近な例えを使って平易な言葉で'},
+  newspaper: {label:'新聞記事レベル',      prompt:'一般の読者向けに新聞記事のようにわかりやすく、必要な背景知識も補足しながら'},
+  expert:    {label:'専門家向け',          prompt:'専門的な知識を持つ読者向けに、技術的な詳細や背景理論も含めて詳しく'}
 };
 
-document.getElementById('apiKey').addEventListener('input',e=>{
-  document.getElementById('apiDot').className='api-dot'+(e.target.value.trim().startsWith('sk-ant-')?' ok':'');
-  updateButtons();
+// API Key
+document.getElementById('apiKey').addEventListener('input', e => {
+  document.getElementById('apiDot').className = 'api-dot' + (e.target.value.trim().startsWith('sk-ant-') ? ' ok' : '');
 });
-document.getElementById('pasteText').addEventListener('input',updateButtons);
-document.getElementById('episodeUrl').addEventListener('input',()=>{currentEpisodeUrl=document.getElementById('episodeUrl').value.trim();});
 
-function updateButtons(){
-  const hasKey=document.getElementById('apiKey').value.trim().startsWith('sk-ant-');
-  const hasHtm=htmContent.trim().length>0||document.getElementById('pasteText').value.trim().length>0;
-  document.getElementById('btnAnalyzeHtm').disabled=!(hasKey&&hasHtm);
-  document.getElementById('btnAnalyzeVoice').disabled=!(hasKey&&voiceTranscript.trim().length>10);
-  const src=document.getElementById('audioPlayer').src;
-  document.getElementById('btnStartVoice').disabled=!src||src===window.location.href;
-}
-
-function switchMode(m){
-  ['Htm','Voice'].forEach(x=>{
-    document.getElementById('panel'+x).classList.toggle('active',x===m);
-    document.getElementById('tab'+x).classList.toggle('active',x===m);
+// ステップ制御
+function setStep(n) {
+  [1,2,3].forEach(i => {
+    const el = document.getElementById('stp'+i);
+    el.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
   });
 }
 
-// HTMファイル
-const dz=document.getElementById('dropZone');
-document.getElementById('htmFile').addEventListener('change',e=>loadHtmFile(e.target.files[0]));
-dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag-over')});
-dz.addEventListener('dragleave',()=>dz.classList.remove('drag-over'));
-dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag-over');loadHtmFile(e.dataTransfer.files[0])});
-
-function loadHtmFile(file){
-  if(!file)return;
-  const r=new FileReader();
-  r.onload=e=>{
-    const doc=new DOMParser().parseFromString(e.target.result,'text/html');
-    doc.querySelectorAll('script,style').forEach(el=>el.remove());
-    htmContent=doc.body?doc.body.innerText:e.target.result;
-    const fl=document.getElementById('fileLoaded');
-    fl.textContent=`✓ ${file.name} — ${(file.size/1024).toFixed(0)}KB 読み込み完了`;
-    fl.classList.add('show');
-    updateButtons();
-  };
-  r.readAsText(file,'utf-8');
+function backToStep1() {
+  document.getElementById('step1Panel').style.display = 'block';
+  document.getElementById('step2Panel').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').innerHTML = '';
+  setStep(1);
 }
 
-async function analyzeHtm(){
-  const apiKey=document.getElementById('apiKey').value.trim();
-  const pasted=document.getElementById('pasteText').value.trim();
-  const source=pasted||htmContent;
-  if(!source)return showError('htmError','解析するテキストがありません');
-  currentEpisodeUrl=document.getElementById('episodeUrl').value.trim();
-  startLoading('エピソードを解析中...');hideError('htmError');
-  const prompt=`以下はポッドキャスト「ゆるコンピュータ科学ラジオ」のエピソードページまたは目次・説明文です。
+// STEP 1→2: エピソード一覧取得
+async function fetchEpisodes() {
+  document.getElementById('btnFetch').disabled = true;
+  document.getElementById('fetchErr').className = 'err';
+  document.getElementById('step1Panel').style.display = 'none';
+  document.getElementById('step2Panel').style.display = 'block';
+  document.getElementById('epSpin').classList.add('show');
+  document.getElementById('epList').innerHTML = '';
+  setStep(2);
 
-【入力データ】
-${source.slice(0,8000)}
+  try {
+    const res = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(SHOW_URL));
+    if (!res.ok) throw new Error('取得失敗');
+    const json = await res.json();
+    const html = json.contents;
+    episodes = parseEpisodes(html);
+    if (episodes.length === 0) throw new Error('エピソードが見つかりませんでした');
+    renderEpisodeList();
+  } catch(e) {
+    // alloriginsが失敗した場合、直接fetchを試みる
+    try {
+      const res2 = await fetch(SHOW_URL);
+      const html2 = await res2.text();
+      episodes = parseEpisodes(html2);
+      if (episodes.length === 0) throw new Error('エピソードが見つかりませんでした');
+      renderEpisodeList();
+    } catch(e2) {
+      document.getElementById('epSpin').classList.remove('show');
+      document.getElementById('epErr').textContent = 'エピソード取得に失敗しました。手動入力モードに切り替えます。';
+      document.getElementById('epErr').className = 'err show';
+      renderManualInput();
+    }
+  } finally {
+    document.getElementById('btnFetch').disabled = false;
+  }
+}
+
+function parseEpisodes(html) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const result = [];
+  // Spotify for Creatorsのエピソードリンクを抽出
+  const links = doc.querySelectorAll('a[href*="/episodes/"]');
+  const seen = new Set();
+  links.forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href || seen.has(href)) return;
+    seen.add(href);
+    // タイトル抽出
+    const titleEl = a.querySelector('h4, h3, h2, strong') || a;
+    const rawTitle = titleEl.textContent.trim();
+    if (!rawTitle || rawTitle.length < 3) return;
+    // 日付抽出（近くのテキストから）
+    const parent = a.closest('li, article, div') || a.parentElement;
+    const dateMatch = parent ? parent.textContent.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}/) : null;
+    const date = dateMatch ? dateMatch[0] : '';
+    // 説明文
+    const descEl = parent ? parent.querySelector('p') : null;
+    const desc = descEl ? descEl.textContent.trim().slice(0, 300) : '';
+    const fullUrl = href.startsWith('http') ? href : 'https://podcasters.spotify.com' + href;
+    result.push({ title: rawTitle, date, desc, url: fullUrl, appleUrl: '' });
+  });
+  return result;
+}
+
+function renderEpisodeList() {
+  document.getElementById('epSpin').classList.remove('show');
+  const list = document.getElementById('epList');
+  list.innerHTML = episodes.map((ep, i) => `
+    <div class="ep-item" data-i="${i}" onclick="selectEpisode(${i})">
+      <span class="ep-num">#${String(episodes.length - i).padStart(3,'0')}</span>
+      <span class="ep-title">${ep.title}</span>
+      <span class="ep-date">${ep.date}</span>
+    </div>`).join('');
+}
+
+// 手動入力フォールバック
+function renderManualInput() {
+  const list = document.getElementById('epList');
+  list.innerHTML = `
+    <div style="margin-bottom:12px">
+      <div class="card-label" style="margin-bottom:10px">エピソードの説明文・目次を貼り付けてください</div>
+      <textarea id="manualText" style="width:100%;background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:14px;color:var(--ink);font-family:var(--serif);font-size:14px;line-height:1.7;outline:none;resize:vertical;min-height:140px;transition:border-color .2s" 
+        placeholder="例）【目次】&#10;0:00 バイブコーディングが大流行&#10;1:09 AIにこき使われて悲しかった&#10;..."></textarea>
+      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+        <input type="url" id="manualUrl" style="flex:1;background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:9px 12px;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none" placeholder="Apple Podcast URL（任意）"/>
+      </div>
+    </div>`;
+  // 手動モードでは選択を省略して直接解析へ
+  document.getElementById('btnAnalyze').disabled = false;
+  document.getElementById('btnAnalyze').onclick = analyzeManual;
+  document.getElementById('selectedEp').classList.remove('show');
+}
+
+function selectEpisode(i) {
+  selectedIdx = i;
+  document.querySelectorAll('.ep-item').forEach((el, j) => el.classList.toggle('selected', j === i));
+  const ep = episodes[i];
+  document.getElementById('selectedTitle').textContent = ep.title;
+  document.getElementById('selectedEp').classList.add('show');
+  document.getElementById('btnAnalyze').disabled = false;
+}
+
+// STEP 3: 解析
+async function analyze() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  if (!apiKey) { alert('APIキーを入力してください'); return; }
+  if (selectedIdx < 0) return;
+
+  const ep = episodes[selectedIdx];
+  currentTitle = ep.title;
+  currentAppleUrl = ep.appleUrl || '';
+
+  document.getElementById('step2Panel').style.display = 'none';
+  document.getElementById('analyzeSpin').classList.add('show');
+  document.getElementById('analyzeSpinSub').textContent = 'エピソードページを取得中...';
+  setStep(3);
+
+  // エピソードページから詳細テキストを取得
+  let epContent = ep.desc || ep.title;
+  try {
+    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(ep.url);
+    const res = await fetch(proxyUrl);
+    if (res.ok) {
+      const json = await res.json();
+      const doc = new DOMParser().parseFromString(json.contents, 'text/html');
+      doc.querySelectorAll('script,style').forEach(el => el.remove());
+      epContent = doc.body ? doc.body.innerText.slice(0, 6000) : epContent;
+    }
+  } catch(e) { /* フォールバック: タイトル+descで解析 */ }
+
+  document.getElementById('analyzeSpinSub').textContent = 'TASSIOが分析中...';
+  await runAnalysis(apiKey, epContent, ep.title, ep.url);
+}
+
+async function analyzeManual() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  if (!apiKey) { alert('APIキーを入力してください'); return; }
+  const text = document.getElementById('manualText')?.value.trim() || '';
+  if (!text) { alert('テキストを入力してください'); return; }
+  currentTitle = 'エピソード';
+  currentAppleUrl = document.getElementById('manualUrl')?.value.trim() || '';
+  document.getElementById('step2Panel').style.display = 'none';
+  document.getElementById('analyzeSpin').classList.add('show');
+  setStep(3);
+  await runAnalysis(apiKey, text, currentTitle, currentAppleUrl);
+}
+
+async function runAnalysis(apiKey, content, title, epUrl) {
+  const prompt = `以下はポッドキャスト「ゆるコンピュータ科学ラジオ」のエピソード情報です。
+
+【エピソード情報】
+${content}
 
 内容理解支援コンテンツをJSON形式で生成してください（JSONのみ、前後テキスト不要）:
-{"episode_title":"エピソードタイトル","episode_url":"Apple PodcastのURL（入力から発見できれば、なければ空）","toc":[{"time":"0:00","topic":"トピック名"}],"summary":"400〜600文字の要約。専門知識がない読者向け。","terms":[{"name":"用語","desc":"2〜3文の解説"}],"mermaid":"graph LR または graph TD で概念図（日本語可、15ノード以内）"}`;
-  try{
-    const data=await callClaude(apiKey,prompt);
-    const parsed=JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
-    if(!currentEpisodeUrl&&parsed.episode_url)currentEpisodeUrl=parsed.episode_url;
+{"episode_title":"${title}","toc":[{"time":"0:00","topic":"トピック名"}],"summary":"400〜600文字の要約。専門知識がない読者向け。","terms":[{"name":"用語","desc":"2〜3文の解説"}],"mermaid":"graph LR または graph TD で概念図（日本語可、15ノード以内）"}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,messages:[{role:'user',content:prompt}]})
+    });
+    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'API error'); }
+    const data = await res.json();
+    const parsed = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
+    if (!currentAppleUrl && epUrl) currentAppleUrl = epUrl;
+    document.getElementById('analyzeSpin').classList.remove('show');
     await renderResults(parsed);
-  }catch(e){stopLoading();showError('htmError','エラー: '+e.message);}
+  } catch(e) {
+    document.getElementById('analyzeSpin').classList.remove('show');
+    document.getElementById('step2Panel').style.display = 'block';
+    setStep(2);
+    alert('エラー: ' + e.message);
+  }
 }
 
-// 音声
-const dza=document.getElementById('dropZoneAudio');
-document.getElementById('audioFile').addEventListener('change',e=>loadAudio(e.target.files[0]));
-dza.addEventListener('dragover',e=>{e.preventDefault();dza.classList.add('drag-over')});
-dza.addEventListener('dragleave',()=>dza.classList.remove('drag-over'));
-dza.addEventListener('drop',e=>{e.preventDefault();dza.classList.remove('drag-over');loadAudio(e.dataTransfer.files[0])});
-
-function loadAudio(file){
-  if(!file||!file.type.startsWith('audio/')){showError('voiceError','音声ファイルを選択してください');return;}
-  const p=document.getElementById('audioPlayer');
-  p.src=URL.createObjectURL(file);p.style.display='block';
-  const al=document.getElementById('audioLoaded');
-  al.textContent=`✓ ${file.name}`;al.classList.add('show');
-  voiceTranscript='';updateButtons();
-}
-
-function startRecognition(){
-  if(!('webkitSpeechRecognition'in window||'SpeechRecognition'in window)){showError('voiceError','Chromeをご使用ください');return;}
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  recognition=new SR();recognition.lang='ja-JP';recognition.continuous=true;recognition.interimResults=true;
-  let ft='';
-  recognition.onstart=()=>{
-    isRecognizing=true;
-    document.getElementById('btnStartVoice').disabled=true;
-    document.getElementById('btnStopVoice').classList.add('show');
-    document.getElementById('voiceStatus').classList.add('show');
-    document.getElementById('statusText').textContent='文字起こし中...';
-    document.getElementById('transcriptWrap').classList.add('show');
-  };
-  recognition.onresult=e=>{
-    let interim='';
-    for(let i=e.resultIndex;i<e.results.length;i++){
-      if(e.results[i].isFinal)ft+=e.results[i][0].transcript;
-      else interim+=e.results[i][0].transcript;
-    }
-    voiceTranscript=ft;
-    document.getElementById('transcriptBody').textContent=ft+(interim?'\n【認識中】'+interim:'');
-    document.getElementById('transcriptBody').scrollTop=9999;
-  };
-  recognition.onerror=e=>{if(e.error!=='no-speech')showError('voiceError','音声認識エラー: '+e.error);};
-  recognition.onend=()=>{
-    if(isRecognizing){recognition.start();return;}
-    document.getElementById('btnStartVoice').disabled=false;
-    document.getElementById('btnStopVoice').classList.remove('show');
-    document.getElementById('statusDot').className='status-pulse done';
-    document.getElementById('statusText').textContent='完了 — '+voiceTranscript.length+'文字';
-    updateButtons();
-  };
-  recognition.start();
-  document.getElementById('audioPlayer').play().catch(()=>{});
-}
-
-function stopRecognition(){
-  isRecognizing=false;if(recognition)recognition.stop();
-  document.getElementById('audioPlayer').pause();
-}
-
-async function analyzeVoice(){
-  const apiKey=document.getElementById('apiKey').value.trim();
-  startLoading('文字起こしを解析中...');hideError('voiceError');
-  const prompt=`以下はポッドキャストの音声文字起こしです。
-
-【文字起こし】
-${voiceTranscript}
-
-内容理解支援コンテンツをJSON形式で生成してください（JSONのみ）:
-{"episode_title":"内容から推測したタイトル","episode_url":"","toc":[],"summary":"400〜600文字の要約","terms":[{"name":"用語","desc":"解説"}],"mermaid":"graph LR か graph TD で概念図（日本語可、15ノード以内）"}`;
-  try{
-    const data=await callClaude(apiKey,prompt);
-    await renderResults(JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim()));
-  }catch(e){stopLoading();showError('voiceError','エラー: '+e.message);}
-}
-
-async function callClaude(apiKey,prompt,system){
-  const body={model:'claude-sonnet-4-20250514',max_tokens:2500,messages:[{role:'user',content:prompt}]};
-  if(system)body.system=system;
-  const res=await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-    body:JSON.stringify(body)
-  });
-  if(!res.ok){const err=await res.json();throw new Error(err.error?.message||'API error '+res.status);}
-  return res.json();
-}
-
-async function renderResults(data){
-  stopLoading();
-  currentEpisodeTitle=data.episode_title||'Episode';
-  currentTocItems=data.toc||[];
-  if(!currentEpisodeUrl&&data.episode_url)currentEpisodeUrl=data.episode_url;
-  const el=document.getElementById('results');
-  el.style.display='block';el.innerHTML='';
+// 結果描画
+async function renderResults(data) {
+  currentToc = data.toc || [];
+  currentTitle = data.episode_title || currentTitle;
+  const el = document.getElementById('results');
+  el.style.display = 'block';
+  el.innerHTML = '';
 
   // ヘッダー
-  const hd=document.createElement('div');
-  hd.className='result-header print-hide';
-  hd.innerHTML=`<h2>${data.episode_title||'Episode Analysis'}</h2><button class="btn btn-pdf" onclick="window.print()">⬇ PDFで保存</button>`;
+  const hd = document.createElement('div');
+  hd.className = 'result-header print-hide';
+  hd.innerHTML = `<h2>${currentTitle}</h2>
+    <button class="btn btn-ghost" onclick="backToStep1()">← 別のエピソード</button>
+    <button class="btn btn-pdf" onclick="window.print()">⬇ PDF</button>`;
   el.appendChild(hd);
 
   // 目次 + 深掘りパネル
-  if(currentTocItems.length>0){
-    const sec=document.createElement('div');sec.className='result-section';
-    sec.innerHTML=`<div class="section-title">TABLE OF CONTENTS</div>
+  if (currentToc.length > 0) {
+    const sec = document.createElement('div'); sec.className = 'rsec';
+    sec.innerHTML = `<div class="sec-title">TABLE OF CONTENTS</div>
       <div class="toc-list" id="tocList">
-        ${currentTocItems.map((t,i)=>`
-          <div class="toc-item" data-i="${i}" onclick="selectTopic(${i})">
+        ${currentToc.map((t,i) => `
+          <div class="toc-item" data-i="${i}" onclick="pickTopic(${i})">
             <span class="toc-time">${t.time}</span>
             <span class="toc-text">${t.topic}</span>
           </div>`).join('')}
       </div>
-      <div class="toc-pick-hint print-hide">↑ トピックをクリックすると深掘りレポートを生成できます</div>
-      <div class="deepdive-panel print-hide" id="deepdivePanel">
-        <div class="deepdive-topic" id="deepdiveTopic"></div>
-        <div class="card-label">解説レベルを選択</div>
-        <div class="level-select">
-          ${Object.entries(LEVELS).map(([k,v])=>`<button class="level-btn ${k==='newspaper'?'active':''}" data-lv="${k}" onclick="setLevel('${k}')">${v.label}</button>`).join('')}
+      <div class="toc-hint print-hide">↑ トピックをクリックすると深掘りレポートを生成できます</div>
+      <div class="dd-panel print-hide" id="ddPanel">
+        <div class="dd-topic" id="ddTopic"></div>
+        <div class="card-label">解説レベル</div>
+        <div class="lv-row">
+          ${Object.entries(LEVELS).map(([k,v]) => `<button class="lv-btn ${k==='newspaper'?'act':''}" data-lv="${k}" onclick="setLevel('${k}')">${v.label}</button>`).join('')}
         </div>
         <div class="btn-row">
-          <button class="btn btn-primary" id="btnDeepDive" onclick="generateDeepDive()">✦ 深掘りレポートを生成</button>
+          <button class="btn btn-primary" id="btnDD" onclick="genDD()">✦ 深掘りレポートを生成</button>
         </div>
-        <div class="loading-wrap" id="ddLoading" style="padding:16px">
-          <div class="loading-dots"><span></span><span></span><span></span></div>
-          <div class="loading-sub">GENERATING REPORT</div>
+        <div class="spin-wrap" id="ddSpin" style="padding:16px">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="spin-sub">GENERATING</div>
         </div>
-        <div id="deepdiveResult"></div>
+        <div id="ddResult"></div>
       </div>`;
     el.appendChild(sec);
   }
 
   // 要約
-  if(data.summary){
-    const sec=document.createElement('div');sec.className='result-section';
-    sec.innerHTML=`<div class="section-title">SUMMARY</div><div class="summary-text">${data.summary}</div>`;
+  if (data.summary) {
+    const sec = document.createElement('div'); sec.className = 'rsec';
+    sec.innerHTML = `<div class="sec-title">SUMMARY</div><div class="summary-text">${data.summary}</div>`;
     el.appendChild(sec);
   }
 
   // 概念図
-  if(data.mermaid){
-    const sec=document.createElement('div');sec.className='result-section';
-    const cid='mc_'+Date.now();
-    sec.innerHTML=`<div class="section-title">CONCEPT MAP</div><div class="chart-box"><div class="mermaid" id="${cid}">${data.mermaid}</div></div>`;
+  if (data.mermaid) {
+    const sec = document.createElement('div'); sec.className = 'rsec';
+    const cid = 'mc_'+Date.now();
+    sec.innerHTML = `<div class="sec-title">CONCEPT MAP</div>
+      <div class="chart-box"><div class="mermaid" id="${cid}">${data.mermaid}</div></div>`;
     el.appendChild(sec);
-    try{await mermaid.run({nodes:[document.getElementById(cid)]})}catch(e){document.getElementById(cid).textContent=data.mermaid;}
+    try { await mermaid.run({nodes:[document.getElementById(cid)]}); } catch(e) { document.getElementById(cid).textContent = data.mermaid; }
   }
 
-  // 用語解説
-  if(data.terms&&data.terms.length>0){
-    const sec=document.createElement('div');sec.className='result-section';
-    sec.innerHTML=`<div class="section-title">GLOSSARY</div><div class="term-grid">${data.terms.map(t=>`<div class="term-item"><div class="term-name">${t.name}</div><div class="term-desc">${t.desc}</div></div>`).join('')}</div>`;
+  // 用語
+  if (data.terms?.length > 0) {
+    const sec = document.createElement('div'); sec.className = 'rsec';
+    sec.innerHTML = `<div class="sec-title">GLOSSARY</div>
+      <div class="term-grid">${data.terms.map(t => `
+        <div class="term-item"><div class="term-name">${t.name}</div><div class="term-desc">${t.desc}</div></div>`).join('')}</div>`;
     el.appendChild(sec);
   }
 
-  // ★ しずる感CTA
-  const ctaSec=document.createElement('div');ctaSec.className='result-section';
-  const hasUrl=currentEpisodeUrl&&currentEpisodeUrl!=='#';
-  ctaSec.innerHTML=`
+  // CTA
+  const cta = document.createElement('div'); cta.className = 'rsec';
+  cta.innerHTML = `
     <div class="cta-box">
       <div class="cta-label">NEXT STEP</div>
-      <div class="cta-title">「${data.episode_title||'このエピソード'}」<br>を実際に聴いてみませんか？</div>
+      <div class="cta-title">「${currentTitle}」<br>を実際に聴いてみませんか？</div>
       <div class="cta-sub">概要がつかめたら、あとは声と空気感だけ。</div>
-      ${hasUrl
-        ?`<a class="cta-link" href="${currentEpisodeUrl}" target="_blank" rel="noopener">🎧 Apple Podcastで聴く →</a>`
-        :`<div class="cta-nurl">上部にApple PodcastのURLを入力するとリンクが表示されます</div>`}
+      ${currentAppleUrl
+        ? `<a class="cta-link" href="${currentAppleUrl}" target="_blank" rel="noopener">🎧 Apple Podcastで聴く →</a>`
+        : `<a class="cta-link" href="https://podcasts.apple.com/jp/podcast/id1604353315" target="_blank" rel="noopener">🎧 Apple Podcastで聴く →</a>`}
     </div>`;
-  el.appendChild(ctaSec);
+  el.appendChild(cta);
 
   el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-function selectTopic(i){
-  selectedTopicIndex=i;
-  document.querySelectorAll('.toc-item').forEach((el,j)=>el.classList.toggle('selected',j===i));
-  const t=currentTocItems[i];
-  document.getElementById('deepdiveTopic').textContent=`▶ 選択中: ${t.time} — ${t.topic}`;
-  document.getElementById('deepdivePanel').classList.add('show');
-  document.getElementById('deepdiveResult').innerHTML='';
-  document.getElementById('ddLoading').classList.remove('show');
+// 深掘り
+function pickTopic(i) {
+  ddTopicIdx = i;
+  document.querySelectorAll('.toc-item').forEach((el,j) => el.classList.toggle('sel', j===i));
+  document.getElementById('ddTopic').textContent = `▶ 選択中: ${currentToc[i].time} — ${currentToc[i].topic}`;
+  document.getElementById('ddPanel').classList.add('show');
+  document.getElementById('ddResult').innerHTML = '';
+  document.getElementById('ddSpin').classList.remove('show');
 }
 
-function setLevel(lv){
-  selectedLevel=lv;
-  document.querySelectorAll('.level-btn').forEach(b=>b.classList.toggle('active',b.dataset.lv===lv));
+function setLevel(lv) {
+  selectedLevel = lv;
+  document.querySelectorAll('.lv-btn').forEach(b => b.classList.toggle('act', b.dataset.lv===lv));
 }
 
-async function generateDeepDive(){
-  if(selectedTopicIndex<0)return;
-  const apiKey=document.getElementById('apiKey').value.trim();
-  const t=currentTocItems[selectedTopicIndex];
-  const lv=LEVELS[selectedLevel];
-  document.getElementById('ddLoading').classList.add('show');
-  document.getElementById('deepdiveResult').innerHTML='';
-  document.getElementById('btnDeepDive').disabled=true;
-  const prompt=`ポッドキャスト「ゆるコンピュータ科学ラジオ」のエピソード「${currentEpisodeTitle}」の中のトピック「${t.topic}」について、${lv.prompt}解説してください。
-
-以下の構成でHTMLフラグメントとして出力してください（<div class="report-body">で囲み、<h3>と<p>タグのみ使用）:
-1. このトピックとは何か
-2. なぜ重要・面白いのか
-3. 具体例や身近なたとえ
-4. まとめ・ポイント
-
-文字数目安: 600〜900文字`;
-  try{
-    const data=await callClaude(apiKey,prompt);
-    document.getElementById('deepdiveResult').innerHTML=data.content[0].text.trim();
-  }catch(e){
-    document.getElementById('deepdiveResult').innerHTML=`<div class="error-box show">エラー: ${e.message}</div>`;
-  }finally{
-    document.getElementById('ddLoading').classList.remove('show');
-    document.getElementById('btnDeepDive').disabled=false;
+async function genDD() {
+  if (ddTopicIdx < 0) return;
+  const apiKey = document.getElementById('apiKey').value.trim();
+  const t = currentToc[ddTopicIdx];
+  const lv = LEVELS[selectedLevel];
+  document.getElementById('ddSpin').classList.add('show');
+  document.getElementById('ddResult').innerHTML = '';
+  document.getElementById('btnDD').disabled = true;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:
+        `ポッドキャスト「ゆるコンピュータ科学ラジオ」のエピソード「${currentTitle}」のトピック「${t.topic}」について、${lv.prompt}解説してください。
+<div class="report-body">で囲み、<h3>と<p>のみ使って以下の構成でHTMLフラグメントを出力（他テキスト不要）:
+1. このトピックとは何か / 2. なぜ重要・面白いのか / 3. 具体例・身近なたとえ / 4. まとめ・ポイント
+文字数目安: 600〜900文字`}]})
+    });
+    const d = await res.json();
+    document.getElementById('ddResult').innerHTML = d.content[0].text.trim();
+  } catch(e) {
+    document.getElementById('ddResult').innerHTML = `<div class="err show">エラー: ${e.message}</div>`;
+  } finally {
+    document.getElementById('ddSpin').classList.remove('show');
+    document.getElementById('btnDD').disabled = false;
   }
 }
-
-function startLoading(msg){
-  document.getElementById('loadingWrap').classList.add('show');
-  document.getElementById('loadingText').textContent=msg||'PROCESSING';
-  document.getElementById('results').style.display='none';
-}
-function stopLoading(){document.getElementById('loadingWrap').classList.remove('show');}
-function showError(id,msg){const el=document.getElementById(id);el.textContent=msg;el.classList.add('show');}
-function hideError(id){document.getElementById(id).classList.remove('show');}
 </script>
 </body>
 </html>
