@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TASSIO — Development Report | QQ Series #039</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700;800&family=Noto+Sans+JP:wght@400;700;900&family=Caveat:wght@400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FDFDFD;color:#000;font-family:'Noto Sans JP',sans-serif;max-width:680px;margin:0 auto}
+.znav{background:#0A0A0A;height:56px;display:flex;align-items:center;padding:0 24px;justify-content:space-between}
+.znav-logo{font-family:'Oswald',sans-serif;font-size:18px;font-weight:800;color:#FDFDFD;letter-spacing:2px}
+.znav-meta{font-family:'Noto Sans JP',sans-serif;font-size:11px;color:#B5B5B5;letter-spacing:2px;text-transform:uppercase}
+.marquee-wrap{background:#4EB655;height:56px;overflow:hidden;display:flex;align-items:center;border-top:1.5px solid #000;border-bottom:1.5px solid #000}
+.marquee-track{display:flex;white-space:nowrap;animation:scroll 28s linear infinite}
+.marquee-track span{font-family:'Oswald',sans-serif;font-size:28px;font-weight:700;color:#000;padding:0 16px;letter-spacing:-0.5px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero{background:#F6F0E1;padding:48px 40px 40px;border-bottom:1.5px solid #000;position:relative;overflow:hidden}
+.hero-issue{font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#E9450A;margin-bottom:12px}
+.hero-title{font-family:'Oswald',sans-serif;font-size:64px;font-weight:800;line-height:0.92;letter-spacing:-1px;text-transform:uppercase;color:#000;margin-bottom:16px}
+.hero-title em{color:#4EB655;font-style:normal}
+.hero-lead{font-family:'Noto Sans JP',sans-serif;font-size:17px;font-weight:400;line-height:1.85;letter-spacing:0.04em;color:#000;max-width:480px}
+.hero-badge{position:absolute;top:40px;right:32px;background:#FFEA00;border:1.5px solid #000;border-radius:9999px;padding:6px 16px;font-family:'Noto Sans JP',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#000}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1.5px solid #000}
+.stat-cell{padding:20px 24px;border-right:1.5px solid #000;background:#FDFDFD}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-family:'Oswald',sans-serif;font-size:40px;font-weight:900;line-height:1;color:#000;letter-spacing:-0.5px}
+.stat-unit{font-family:'Oswald',sans-serif;font-size:16px;color:#5C5C5C}
+.stat-label{font-family:'Noto Sans JP',sans-serif;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#5C5C5C;margin-top:4px}
+.chapter-door{background:#0A0A0A;padding:20px 40px;display:flex;align-items:center;gap:16px;border-bottom:1.5px solid #000}
+.chapter-num{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;color:#4EB655;text-transform:uppercase}
+.chapter-title{font-family:'Oswald',sans-serif;font-size:24px;font-weight:700;color:#FDFDFD;letter-spacing:-0.3px;text-transform:uppercase}
+.card{background:#FDFDFD;border:1.5px solid #000;border-radius:24px;padding:24px}
+.card-cream{background:#F6F0E1;border:1.5px solid #000;border-radius:24px;padding:24px}
+.card-dark{background:#0A0A0A;border:1.5px solid #000;border-radius:24px;padding:24px}
+.section{padding:40px;border-bottom:1.5px solid #000}
+.section-title{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#000;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.section-title::after{content:'';flex:1;height:1.5px;background:#000}
+.tag{display:inline-block;background:#FFEA00;border:1.5px solid #000;border-radius:9999px;padding:3px 12px;font-family:'Noto Sans JP',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#000}
+.tag-green{background:#4EB655}
+.tag-flame{background:#E9450A;color:#FDFDFD}
+.timeline{display:grid;gap:0}
+.tl-item{display:grid;grid-template-columns:80px 1fr;gap:0;border-bottom:1px solid rgba(0,0,0,0.12)}
+.tl-item:last-child{border-bottom:none}
+.tl-left{padding:16px 16px 16px 0;border-right:1.5px solid #000;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.tl-ver{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;color:#E9450A;letter-spacing:2px}
+.tl-time{font-family:'Noto Sans JP',sans-serif;font-size:10px;color:#5C5C5C;letter-spacing:2px}
+.tl-right{padding:16px 0 16px 20px}
+.tl-ttl{font-family:'Noto Sans JP',sans-serif;font-size:15px;font-weight:700;line-height:1.4;color:#000;margin-bottom:6px}
+.tl-body{font-family:'Noto Sans JP',sans-serif;font-size:14px;font-weight:400;line-height:1.85;letter-spacing:0.03em;color:#000}
+.quote{font-family:'Caveat',serif;font-size:22px;font-weight:400;font-style:italic;line-height:1.4;color:#000;border-left:3px solid #4EB655;padding-left:20px;margin:0}
+.zbtn{display:inline-flex;align-items:center;gap:8px;background:#0A0A0A;color:#FDFDFD;border:1.5px solid #FDFDFD;border-radius:9999px;padding:12px 24px;font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+.zfooter{background:#0A0A0A;padding:48px 40px 32px;color:#FDFDFD}
+.zfooter-series{font-family:'Oswald',sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;color:#4EB655;text-transform:uppercase;margin-bottom:8px}
+.zfooter-title{font-family:'Oswald',sans-serif;font-size:28px;font-weight:800;color:#FDFDFD;margin-bottom:24px;letter-spacing:-0.5px}
+.zfooter-copy{font-family:'Noto Sans JP',sans-serif;font-size:11px;color:#5C5C5C;letter-spacing:2px;margin-top:32px;padding-top:20px;border-top:1px solid #333}
+</style>
+</head>
+<body>
+
+<nav class="znav">
+  <div class="znav-logo">TASSIO</div>
+  <div class="znav-meta">QQ Series — Dev Report</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-issue">Development Report ✿ QQ #039</div>
+  <div class="hero-title">FROM<br><em>MOYAMOYA</em><br>TO APP</div>
+  <div class="hero-lead">ベッドで相談して5分で生まれた初号機。<br>ハルシネーション、CORS の壁、RSS の罠。<br>幾多の紆余曲折を経て、TASSIOは完成した。</div>
+  <div class="hero-badge">2026.05.06</div>
+  <div style="position:absolute;bottom:-10px;right:28px;transform:rotate(8deg)">
+    <svg width="76" height="76" viewBox="0 0 76 76">
+      <g transform="translate(38,38)">
+        <ellipse rx="11" ry="22" fill="#FFEA00" stroke="#000" stroke-width="1.5" transform="rotate(0)"/>
+        <ellipse rx="11" ry="22" fill="#FFEA00" stroke="#000" stroke-width="1.5" transform="rotate(72)"/>
+        <ellipse rx="11" ry="22" fill="#FFEA00" stroke="#000" stroke-width="1.5" transform="rotate(144)"/>
+        <ellipse rx="11" ry="22" fill="#FFEA00" stroke="#000" stroke-width="1.5" transform="rotate(216)"/>
+        <ellipse rx="11" ry="22" fill="#FFEA00" stroke="#000" stroke-width="1.5" transform="rotate(288)"/>
+        <circle r="15" fill="#FDFDFD" stroke="#000" stroke-width="1.5"/>
+        <circle cx="-5" cy="-3" r="2" fill="#000"/>
+        <circle cx="5" cy="-3" r="2" fill="#000"/>
+        <path d="M-6,4 Q0,10 6,4" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>TASSIO ✿</span><span>DEV LOG ✳︎</span><span>QQ #039 ☻</span><span>MOYAMOYA → APP ✿</span><span>TASSIO ✳︎</span><span>5 MIN BUILD ☻</span><span>ITUNES API ✿</span><span>STEP BY STEP ✳︎</span>
+    <span>TASSIO ✿</span><span>DEV LOG ✳︎</span><span>QQ #039 ☻</span><span>MOYAMOYA → APP ✿</span><span>TASSIO ✳︎</span><span>5 MIN BUILD ☻</span><span>ITUNES API ✿</span><span>STEP BY STEP ✳︎</span>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-cell"><div><span class="stat-num">5</span><span class="stat-unit"> min</span></div><div class="stat-label">初号機 開発時間</div></div>
+  <div class="stat-cell"><div><span class="stat-num">3</span><span class="stat-unit"> ver</span></div><div class="stat-label">バージョン数</div></div>
+  <div class="stat-cell"><div><span class="stat-num">0</span><span class="stat-unit"> ¥</span></div><div class="stat-label">外部ライブラリコスト</div></div>
+</div>
+
+<div class="chapter-door"><div class="chapter-num">Ch.01</div><div class="chapter-title">The Origin — ベッドからの相談</div></div>
+<div class="section">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+    <div class="card-cream">
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#5C5C5C;margin-bottom:10px">ORIGINAL MOYAMOYA</div>
+      <p style="font-family:'Noto Sans JP',sans-serif;font-size:15px;line-height:1.85;letter-spacing:0.04em;color:#000">「ゆるコンピュータ科学ラジオを聴いてるんだけど、耳と頭がついていかない。文字起こしとチャート化ができるアプリを作りたい」</p>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;justify-content:space-between">
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#5C5C5C;margin-bottom:10px">SOLUTION PATH</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span class="tag">Web Speech API</span>
+        <span class="tag tag-green" style="color:#000">Claude API</span>
+        <span class="tag">Single HTML</span>
+      </div>
+    </div>
+  </div>
+  <blockquote class="quote">「ベッドでちゃちゃっと相談しただけなのにもうできちゃった 🙂‍↕️」</blockquote>
+</div>
+
+<div class="chapter-door"><div class="chapter-num">Ch.02</div><div class="chapter-title">The Naming — TASSIOの誕生</div></div>
+<div class="section">
+  <div class="section-title">命名の系譜</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card-cream">
+      <div style="font-family:'Oswald',sans-serif;font-size:24px;font-weight:800;color:#000;margin-bottom:4px">mimikara.fm</div>
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:11px;color:#5C5C5C;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">v1.0 初号機</div>
+      <p style="font-family:'Noto Sans JP',sans-serif;font-size:13px;line-height:1.8;color:#000">「耳から」＋「.fm」。音声ファイルをアップして流しながら文字起こし。開発時間は伝説の5分。</p>
+    </div>
+    <div class="card-dark">
+      <div style="font-family:'Oswald',sans-serif;font-size:24px;font-weight:800;color:#4EB655;margin-bottom:4px">TASSIO</div>
+      <div style="font-family:'Noto Sans JP',sans-serif;font-size:11px;color:#5C5C5C;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">v2.0 → v3.1</div>
+      <p style="font-family:'Noto Sans JP',sans-serif;font-size:13px;line-height:1.8;color:#FDFDFD">筒井康隆『旅のラゴス』の記憶者の少年へのオマージュ。バクロニム：<em style="font-family:'Caveat',serif;font-size:15px">Transcribe &amp; Archive System for Strategic Information Organization</em></p>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-door"><div class="chapter-num">Ch.03</div><div class="chapter-title">The Struggle — 壁との闘い</div></div>
+<div class="section">
+  <div class="section-title">開発タイムライン</div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-ver">v1.0</div><div class="tl-time">DAY 1</div></div>
+      <div class="tl-right">
+        <div class="tl-ttl">mimikara.fm — 5分で初号機完成 <span class="tag" style="font-size:10px;padding:2px 8px">最短記録</span></div>
+        <div class="tl-body">Web Speech API＋Claude API。音声ファイルをドロップして再生→文字起こし→要約・概念図・用語解説を生成。シンプルで壊れない初号機。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-ver" style="color:#E9450A">CRISIS</div><div class="tl-time">DAY 2</div></div>
+      <div class="tl-right">
+        <div class="tl-ttl">ハルシネーション発覚 <span class="tag tag-flame" style="font-size:10px;padding:2px 8px">要注意</span></div>
+        <div class="tl-body">URLだけ渡すとタイトルから「それっぽい」目次をでっち上げる。「データラベリング」「AI労働市場」——本当の内容「バイブコーディング」「AIガバナンス」と全然違う。AIの限界を可視化した瞬間。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-ver" style="color:#E9450A">WALL</div><div class="tl-time">DAY 2</div></div>
+      <div class="tl-right">
+        <div class="tl-ttl">CORS・RSS・HTMの迷宮</div>
+        <div class="tl-body">Spotify for Creators → CORS壁。Apple Podcast → DRM。RSS → URL変換できず。メールで共有→HTMファイル取得→再現不可。一時は手動入力フォールバック頼みに。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-ver" style="color:#4EB655">BREAK</div><div class="tl-time">DAY 2</div></div>
+      <div class="tl-right">
+        <div class="tl-ttl">iTunes Search API 発見 <span class="tag tag-green" style="font-size:10px;padding:2px 8px;color:#000">解決</span></div>
+        <div class="tl-body">Apple公式・無料・認証不要・CORS完全フリー。番組ID一本で最新50エピソードのタイトル・説明文・目次・再生時間・Apple PodcastのURLが全部JSONで取得可能。</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left"><div class="tl-ver">v3.1</div><div class="tl-time">DAY 2</div></div>
+      <div class="tl-right">
+        <div class="tl-ttl">3ステップフロー完成 <span class="tag tag-green" style="font-size:10px;padding:2px 8px;color:#000">完成</span></div>
+        <div class="tl-body">「番組を選ぶ→エピソードを選ぶ→TASSIOで解析」。ファイル操作不要。深掘りレポート・レベル選択・PDF出力・しずるCTA搭載。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chapter-door"><div class="chapter-num">Ch.04</div><div class="chapter-title">The Philosophy — 設計思想</div></div>
+<div class="section">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+    <div class="card">
+      <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#000;margin-bottom:8px;letter-spacing:1px">友軍設計</div>
+      <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.85;color:#000">「ポッドキャスト視聴の代替」ではなく「視聴のきっかけと補助」。概要がつかめたら、あとは声と空気感だけ。コンテンツ運営の邪魔をしない友軍として設計。</p>
+    </div>
+    <div class="card">
+      <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:#000;margin-bottom:8px;letter-spacing:1px">理解のひと手間</div>
+      <p style="font-family:'Noto Sans JP',sans-serif;font-size:14px;line-height:1.85;color:#000">モヤモヤ→アプリ化というQQの流れが「聴く前の準備」「理解の補助」へ深化。QQシリーズの中でも教育アプリとしての完成度が高い一作。</p>
+    </div>
+  </div>
+  <div class="card-cream">
+    <div style="font-family:'Noto Sans JP',sans-serif;font-size:13px;font-weight:700;letter-spacing:2px;color:#5C5C5C;margin-bottom:12px;text-transform:uppercase">Stack</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span class="tag">iTunes Search API</span>
+      <span class="tag tag-green" style="color:#000">Claude Sonnet 4</span>
+      <span class="tag">Mermaid.js</span>
+      <span class="tag">Web Speech API</span>
+      <span class="tag">Vanilla JS</span>
+      <span class="tag">Single HTML</span>
+      <span class="tag">GitHub Pages</span>
+    </div>
+  </div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track" style="animation-duration:22s;animation-direction:reverse">
+    <span>SUMMARY ✿</span><span>概要 ✳︎</span><span>用語解説 ☻</span><span>深掘りレポート ✿</span><span>PDF出力 ✳︎</span><span>3 STEP FLOW ☻</span>
+    <span>SUMMARY ✿</span><span>概要 ✳︎</span><span>用語解説 ☻</span><span>深掘りレポート ✿</span><span>PDF出力 ✳︎</span><span>3 STEP FLOW ☻</span>
+  </div>
+</div>
+
+<footer class="zfooter">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start">
+    <div>
+      <div class="zfooter-series">QQ Series #039</div>
+      <div class="zfooter-title">TASSIO v3.1</div>
+      <a class="zbtn" href="https://github.com/qq-collective" target="_blank" rel="noopener">GitHub を見る →</a>
+    </div>
+    <div style="transform:rotate(-9deg);margin-top:-4px">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <g transform="translate(50,50)">
+          <ellipse rx="14" ry="28" fill="#4EB655" stroke="#FDFDFD" stroke-width="1.5" transform="rotate(0)"/>
+          <ellipse rx="14" ry="28" fill="#4EB655" stroke="#FDFDFD" stroke-width="1.5" transform="rotate(72)"/>
+          <ellipse rx="14" ry="28" fill="#4EB655" stroke="#FDFDFD" stroke-width="1.5" transform="rotate(144)"/>
+          <ellipse rx="14" ry="28" fill="#4EB655" stroke="#FDFDFD" stroke-width="1.5" transform="rotate(216)"/>
+          <ellipse rx="14" ry="28" fill="#4EB655" stroke="#FDFDFD" stroke-width="1.5" transform="rotate(288)"/>
+          <circle r="18" fill="#FDFDFD" stroke="#FDFDFD" stroke-width="1.5"/>
+          <circle cx="-6" cy="-4" r="2.5" fill="#000"/>
+          <circle cx="6" cy="-4" r="2.5" fill="#000"/>
+          <path d="M-7,5 Q0,12 7,5" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="zfooter-copy">
+    Senari Gakuin / qq-collective ✿ 2026.05.06 ✳︎ モヤモヤを結晶化したらアプリになった ☻
+  </div>
+</footer>
+
+</body>
+</html>
