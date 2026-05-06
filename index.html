@@ -19,14 +19,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(139,94,60,0.05) 1px,transparent 1px);background-size:100% 48px;pointer-events:none;z-index:0}
 .wrap{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:48px 24px 80px}
 
-/* ヘッダー */
 header{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--dust)}
 .logo{font-family:var(--mono);font-size:11px;letter-spacing:6px;color:var(--inkfaint);margin-bottom:8px}
 header h1{font-family:var(--serif);font-size:52px;font-weight:300;letter-spacing:12px;color:var(--terradark);line-height:1;margin-bottom:10px}
 header h1 em{font-style:italic;color:var(--accent)}
 .tagline{font-size:13px;color:var(--inkdim);font-style:italic}
 
-/* APIキー */
 .api-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.5);border:1px solid var(--dust);border-radius:4px;padding:12px 16px;margin-bottom:28px}
 .api-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--inkfaint);white-space:nowrap}
 .api-input{flex:1;background:transparent;border:none;border-bottom:1px solid var(--dust);padding:4px 0;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none;transition:border-color .2s}
@@ -34,75 +32,69 @@ header h1 em{font-style:italic;color:var(--accent)}
 .api-dot{width:7px;height:7px;border-radius:50%;background:var(--dust);transition:all .3s;flex-shrink:0}
 .api-dot.ok{background:var(--green);box-shadow:0 0 6px rgba(74,124,89,.4)}
 
-/* ステップ表示 */
-.steps{display:flex;gap:0;margin-bottom:28px;border:1px solid var(--dust);border-radius:4px;overflow:hidden}
-.step{flex:1;padding:14px 10px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--inkfaint);border-right:1px solid var(--dust);line-height:1.5;transition:all .2s;position:relative}
+.steps{display:flex;margin-bottom:28px;border:1px solid var(--dust);border-radius:4px;overflow:hidden}
+.step{flex:1;padding:14px 10px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--inkfaint);border-right:1px solid var(--dust);line-height:1.5;transition:all .2s}
 .step:last-child{border-right:none}
 .step.active{background:var(--terradark);color:var(--sand)}
-.step.done{background:rgba(74,124,89,.12);color:var(--green)}
+.step.done{background:rgba(74,124,89,.1);color:var(--green)}
 .step-num{display:block;font-size:9px;opacity:.6;margin-bottom:3px}
-.step-label{display:block}
 
-/* カード */
 .card{background:rgba(255,255,255,.5);border:1px solid var(--dust);border-radius:4px;padding:24px;margin-bottom:20px}
 .card-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--inkfaint);text-transform:uppercase;margin-bottom:16px}
 
-/* 番組表示（固定） */
-.show-card{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(92,58,30,.06);border:1px solid var(--accentdim);border-radius:4px;margin-bottom:20px}
+/* 番組カード */
+.show-card{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(92,58,30,.06);border:1px solid var(--accentdim);border-radius:4px;margin-bottom:16px}
 .show-icon{font-size:32px;flex-shrink:0}
-.show-name{font-family:var(--serif);font-size:18px;font-weight:400;color:var(--terradark)}
+.show-name{font-family:var(--serif);font-size:18px;color:var(--terradark)}
 .show-meta{font-family:var(--mono);font-size:11px;color:var(--inkfaint);margin-top:3px}
-.show-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;background:var(--terradark);color:var(--sand);padding:3px 8px;border-radius:2px;margin-left:auto;white-space:nowrap}
+.show-badge{font-family:var(--mono);font-size:9px;letter-spacing:2px;background:var(--terradark);color:var(--sand);padding:3px 8px;border-radius:2px;margin-left:auto;white-space:nowrap;flex-shrink:0}
 
 /* エピソードリスト */
-.ep-list{display:grid;gap:6px;max-height:420px;overflow-y:auto;padding-right:4px}
+.ep-list{display:grid;gap:4px;max-height:440px;overflow-y:auto;padding-right:4px}
 .ep-list::-webkit-scrollbar{width:3px}
 .ep-list::-webkit-scrollbar-thumb{background:var(--dust)}
-.ep-item{display:flex;align-items:baseline;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:3px;cursor:pointer;transition:all .15s}
+.ep-item{display:flex;align-items:baseline;gap:12px;padding:11px 14px;border:1px solid transparent;border-radius:3px;cursor:pointer;transition:all .15s}
 .ep-item:hover{background:rgba(196,118,58,.07);border-color:var(--accentdim)}
 .ep-item.selected{background:rgba(92,58,30,.08);border-color:var(--terra)}
-.ep-num{font-family:var(--mono);font-size:10px;color:var(--accent);min-width:36px;flex-shrink:0}
-.ep-title{font-size:14px;color:var(--ink);line-height:1.5;flex:1}
-.ep-date{font-family:var(--mono);font-size:10px;color:var(--inkfaint);white-space:nowrap}
+.ep-num{font-family:var(--mono);font-size:10px;color:var(--accent);min-width:32px;flex-shrink:0}
+.ep-title{font-size:14px;color:var(--ink);flex:1;line-height:1.4}
+.ep-date{font-family:var(--mono);font-size:10px;color:var(--inkfaint);white-space:nowrap;flex-shrink:0}
 
-/* ローディングスピナー */
-.spin-wrap{text-align:center;padding:32px;display:none}
-.spin-wrap.show{display:block}
-.spin-title{font-family:var(--serif);font-size:16px;font-style:italic;color:var(--terradark);margin-bottom:8px}
+/* 選択確認 */
+.sel-ep{background:rgba(92,58,30,.06);border:1px solid var(--accentdim);border-radius:4px;padding:12px 16px;margin-bottom:16px;display:none}
+.sel-ep.show{display:block}
+.sel-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:5px}
+.sel-title{font-family:var(--serif);font-size:15px;color:var(--terradark)}
+
+/* スピナー */
+.spin{text-align:center;padding:28px;display:none}
+.spin.show{display:block}
+.spin-ttl{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--terradark);margin-bottom:6px}
 .spin-sub{font-family:var(--mono);font-size:10px;color:var(--inkfaint);letter-spacing:2px}
-.dots{display:flex;justify-content:center;gap:8px;margin:16px 0}
+.dots{display:flex;justify-content:center;gap:8px;margin:14px 0}
 .dots span{width:6px;height:6px;border-radius:50%;background:var(--terra);animation:ld 1.4s infinite}
 .dots span:nth-child(2){animation-delay:.2s}
 .dots span:nth-child(3){animation-delay:.4s}
 @keyframes ld{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-8px);opacity:1}}
-
-/* 選択エピソード確認 */
-.selected-ep{background:rgba(92,58,30,.06);border:1px solid var(--accentdim);border-radius:4px;padding:14px 16px;margin-bottom:16px;display:none}
-.selected-ep.show{display:block}
-.sel-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:6px}
-.sel-title{font-family:var(--serif);font-size:16px;color:var(--terradark)}
 
 /* ボタン */
 .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:1px;cursor:pointer;border:1px solid;transition:all .2s;white-space:nowrap}
 .btn-primary{background:var(--terradark);color:var(--sand);border-color:var(--terradark)}
 .btn-primary:hover{background:var(--terra)}
 .btn-primary:disabled{background:var(--dust);border-color:var(--dust);color:var(--inkfaint);cursor:not-allowed}
-.btn-outline{background:transparent;color:var(--terradark);border-color:var(--terra)}
-.btn-outline:hover{background:rgba(139,94,60,.06)}
 .btn-ghost{background:transparent;color:var(--inkdim);border-color:var(--dust);font-size:10px;padding:8px 16px}
 .btn-ghost:hover{border-color:var(--terra);color:var(--terra)}
 .btn-pdf{background:var(--accent);color:white;border-color:var(--accent)}
 .btn-pdf:hover{background:var(--terra)}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
 
-/* エラー */
-.err{background:rgba(160,48,32,.08);border:1px solid rgba(160,48,32,.3);border-radius:4px;padding:12px 16px;font-family:var(--mono);font-size:12px;color:#a03020;display:none}
+.err{background:rgba(160,48,32,.08);border:1px solid rgba(160,48,32,.3);border-radius:4px;padding:12px 16px;font-family:var(--mono);font-size:11px;color:#a03020;display:none;margin-top:12px}
 .err.show{display:block}
 
 /* 結果 */
 .results{margin-top:28px;border-top:1px solid var(--dust);padding-top:28px;display:none}
-.result-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
-.result-header h2{font-family:var(--serif);font-size:20px;font-weight:300;font-style:italic;color:var(--terradark);flex:1}
+.r-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.r-header h2{font-family:var(--serif);font-size:20px;font-weight:300;font-style:italic;color:var(--terradark);flex:1}
 .rsec{margin-bottom:28px;animation:fu .4s ease both}
 .rsec:nth-child(2){animation-delay:.05s}
 .rsec:nth-child(3){animation-delay:.1s}
@@ -110,11 +102,11 @@ header h1 em{font-style:italic;color:var(--accent)}
 .rsec:nth-child(5){animation-delay:.2s}
 .rsec:nth-child(6){animation-delay:.25s}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.sec-title{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.sec-title::after{content:'';flex:1;height:1px;background:var(--dust)}
-.summary-text{font-size:16px;line-height:2;color:var(--ink)}
+.sec-ttl{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sec-ttl::after{content:'';flex:1;height:1px;background:var(--dust)}
+.summary-txt{font-size:16px;line-height:2;color:var(--ink)}
 
-/* 目次（クリック選択） */
+/* 目次 */
 .toc-list{display:grid;gap:4px}
 .toc-item{display:flex;gap:12px;align-items:baseline;padding:8px 10px;border-radius:3px;cursor:pointer;transition:all .15s;border:1px solid transparent}
 .toc-item:hover{background:rgba(196,118,58,.07);border-color:var(--accentdim)}
@@ -123,7 +115,7 @@ header h1 em{font-style:italic;color:var(--accent)}
 .toc-text{font-size:14px;color:var(--ink);flex:1}
 .toc-hint{font-family:var(--mono);font-size:10px;color:var(--inkfaint);margin-top:6px}
 
-/* 深掘りパネル */
+/* 深掘り */
 .dd-panel{background:rgba(255,255,255,.5);border:1px solid var(--dust);border-radius:4px;padding:18px;margin-top:12px;display:none}
 .dd-panel.show{display:block}
 .dd-topic{font-family:var(--mono);font-size:11px;color:var(--terra);margin-bottom:12px}
@@ -132,15 +124,13 @@ header h1 em{font-style:italic;color:var(--accent)}
 .lv-btn.act{background:var(--terradark);color:var(--sand);border-color:var(--terradark)}
 .lv-btn:hover:not(.act){border-color:var(--terra);color:var(--terra)}
 
-/* チャート */
+/* チャート・用語 */
 .chart-box{background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:20px;overflow-x:auto}
 .mermaid{text-align:center}
 .mermaid svg{max-width:100%}
-
-/* 用語 */
 .term-grid{display:grid;gap:10px}
 .term-item{padding:12px 16px;border-left:2px solid var(--accentdim);background:rgba(255,255,255,.4)}
-.term-name{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--terra);margin-bottom:5px}
+.term-name{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--terra);margin-bottom:4px}
 .term-desc{font-size:14px;line-height:1.8;color:var(--inkdim)}
 
 /* CTA */
@@ -151,17 +141,15 @@ header h1 em{font-style:italic;color:var(--accent)}
 .cta-link{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:var(--accent);color:white;border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:1px;text-decoration:none;transition:all .2s}
 .cta-link:hover{background:var(--terra)}
 
-/* レポート本文 */
 .report-body{font-size:15px;line-height:2.1;color:var(--ink)}
 .report-body h3{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--terradark);margin:18px 0 8px}
 .report-body p{margin-bottom:12px}
 
-/* PDF */
 @media print{
   body{background:white!important}
   body::before,body::after{display:none}
   .wrap{padding:20px;max-width:100%}
-  header,.api-row,.steps,.step1-panel,.step2-panel,.print-hide{display:none!important}
+  header,.api-row,.steps,#step1Panel,#step2Panel,.spin,.print-hide{display:none!important}
   .results{margin-top:0;border-top:none;padding-top:0;display:block!important}
   .cta-box{background:#f5f0e8!important;-webkit-print-color-adjust:exact}
   .cta-link{display:none}
@@ -178,21 +166,19 @@ header h1 em{font-style:italic;color:var(--accent)}
   <div class="tagline">Transcribe & Archive System for Strategic Information Organization</div>
 </header>
 
-<!-- APIキー -->
 <div class="api-row">
   <span class="api-label">API KEY</span>
   <input type="password" class="api-input" id="apiKey" placeholder="sk-ant-..."/>
   <div class="api-dot" id="apiDot"></div>
 </div>
 
-<!-- ステップインジケーター -->
 <div class="steps">
-  <div class="step active" id="stp1"><span class="step-num">STEP 1</span><span class="step-label">番組を選ぶ</span></div>
-  <div class="step" id="stp2"><span class="step-num">STEP 2</span><span class="step-label">エピソードを選ぶ</span></div>
-  <div class="step" id="stp3"><span class="step-num">STEP 3</span><span class="step-label">TASSIOで解析</span></div>
+  <div class="step active" id="stp1"><span class="step-num">STEP 1</span>番組を選ぶ</div>
+  <div class="step" id="stp2"><span class="step-num">STEP 2</span>エピソードを選ぶ</div>
+  <div class="step" id="stp3"><span class="step-num">STEP 3</span>TASSIOで解析</div>
 </div>
 
-<!-- STEP 1: 番組選択 -->
+<!-- STEP 1 -->
 <div id="step1Panel">
   <div class="card">
     <div class="card-label">番組</div>
@@ -211,48 +197,48 @@ header h1 em{font-style:italic;color:var(--accent)}
   </div>
 </div>
 
-<!-- STEP 2: エピソード選択 -->
+<!-- STEP 2 -->
 <div id="step2Panel" style="display:none">
   <div class="card">
-    <div class="card-label">エピソードを選んでください</div>
-    <div class="spin-wrap" id="epSpin">
+    <div class="card-label" id="epCardLabel">エピソードを選んでください</div>
+    <div class="spin" id="epSpin">
       <div class="dots"><span></span><span></span><span></span></div>
-      <div class="spin-title">エピソード一覧を取得中...</div>
-      <div class="spin-sub">LOADING</div>
+      <div class="spin-ttl">エピソード一覧を取得中...</div>
+      <div class="spin-sub">iTunes API に接続中</div>
     </div>
     <div class="ep-list" id="epList"></div>
     <div class="err" id="epErr"></div>
   </div>
-  <div class="selected-ep" id="selectedEp">
-    <div class="sel-label">選択中</div>
-    <div class="sel-title" id="selectedTitle"></div>
+  <div class="sel-ep" id="selEp">
+    <div class="sel-label">選択中のエピソード</div>
+    <div class="sel-title" id="selTitle"></div>
   </div>
   <div class="btn-row print-hide">
-    <button class="btn btn-ghost" onclick="backToStep1()">← 戻る</button>
+    <button class="btn btn-ghost" onclick="goStep1()">← 戻る</button>
     <button class="btn btn-primary" id="btnAnalyze" onclick="analyze()" disabled>✦ TASSIOで解析</button>
   </div>
 </div>
 
-<!-- STEP 3: 解析中 -->
-<div class="spin-wrap" id="analyzeSpin">
+<!-- 解析中 -->
+<div class="spin" id="analyzeSpin">
   <div class="dots"><span></span><span></span><span></span></div>
-  <div class="spin-title">TASSIOが解析中...</div>
+  <div class="spin-ttl">TASSIOが解析中...</div>
   <div class="spin-sub" id="analyzeSpinSub">PROCESSING</div>
 </div>
 
 <!-- 結果 -->
 <div class="results" id="results"></div>
 
-</div><!-- /wrap -->
-
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
 <script>
 mermaid.initialize({startOnLoad:false,theme:'neutral',themeVariables:{background:'rgba(255,255,255,0.6)',primaryColor:'#e8d5b8',primaryTextColor:'#1a1410',primaryBorderColor:'#d4c9a8',lineColor:'#8b5e3c',secondaryColor:'#f0ead8',fontSize:'13px'}});
 
-const SHOW_URL = 'https://podcasters.spotify.com/pod/show/yurucom';
-const SHOW_APPLE_BASE = 'https://podcasts.apple.com/jp/podcast/id1604353315';
+// ゆるコンピュータ科学ラジオ の iTunes/Apple Podcast ID
+const PODCAST_ID = '1604353315';
+const ITUNES_API = `https://itunes.apple.com/lookup?id=${PODCAST_ID}&entity=podcastEpisode&limit=50&country=JP`;
 
-let episodes = [];       // [{title, date, desc, url, appleUrl}]
+let episodes = [];
 let selectedIdx = -1;
 let selectedLevel = 'newspaper';
 let currentToc = [];
@@ -266,28 +252,27 @@ const LEVELS = {
   expert:    {label:'専門家向け',          prompt:'専門的な知識を持つ読者向けに、技術的な詳細や背景理論も含めて詳しく'}
 };
 
-// API Key
 document.getElementById('apiKey').addEventListener('input', e => {
   document.getElementById('apiDot').className = 'api-dot' + (e.target.value.trim().startsWith('sk-ant-') ? ' ok' : '');
 });
 
-// ステップ制御
 function setStep(n) {
   [1,2,3].forEach(i => {
     const el = document.getElementById('stp'+i);
-    el.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
+    el.className = 'step' + (i < n ? ' done' : i===n ? ' active' : '');
   });
 }
 
-function backToStep1() {
+function goStep1() {
   document.getElementById('step1Panel').style.display = 'block';
   document.getElementById('step2Panel').style.display = 'none';
   document.getElementById('results').style.display = 'none';
   document.getElementById('results').innerHTML = '';
+  selectedIdx = -1;
   setStep(1);
 }
 
-// STEP 1→2: エピソード一覧取得
+// iTunes Search APIでエピソード取得（CORSフリー・認証不要）
 async function fetchEpisodes() {
   document.getElementById('btnFetch').disabled = true;
   document.getElementById('fetchErr').className = 'err';
@@ -295,130 +280,79 @@ async function fetchEpisodes() {
   document.getElementById('step2Panel').style.display = 'block';
   document.getElementById('epSpin').classList.add('show');
   document.getElementById('epList').innerHTML = '';
+  document.getElementById('epErr').className = 'err';
   setStep(2);
 
   try {
-    const res = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(SHOW_URL));
-    if (!res.ok) throw new Error('取得失敗');
-    const json = await res.json();
-    const html = json.contents;
-    episodes = parseEpisodes(html);
+    const res = await fetch(ITUNES_API);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    // kind=podcast-episode のみ抽出（resultCount[0]は番組自体）
+    episodes = data.results
+      .filter(r => r.kind === 'podcast-episode')
+      .map(r => ({
+        title: r.trackName || '',
+        date: r.releaseDate ? r.releaseDate.slice(0,10) : '',
+        desc: r.description || r.shortDescription || '',
+        appleUrl: r.trackViewUrl || '',
+        duration: r.trackTimeMillis ? Math.round(r.trackTimeMillis/60000) + '分' : ''
+      }));
     if (episodes.length === 0) throw new Error('エピソードが見つかりませんでした');
     renderEpisodeList();
   } catch(e) {
-    // alloriginsが失敗した場合、直接fetchを試みる
-    try {
-      const res2 = await fetch(SHOW_URL);
-      const html2 = await res2.text();
-      episodes = parseEpisodes(html2);
-      if (episodes.length === 0) throw new Error('エピソードが見つかりませんでした');
-      renderEpisodeList();
-    } catch(e2) {
-      document.getElementById('epSpin').classList.remove('show');
-      document.getElementById('epErr').textContent = 'エピソード取得に失敗しました。手動入力モードに切り替えます。';
-      document.getElementById('epErr').className = 'err show';
-      renderManualInput();
-    }
+    document.getElementById('epSpin').classList.remove('show');
+    document.getElementById('epErr').textContent = '取得エラー: ' + e.message;
+    document.getElementById('epErr').className = 'err show';
+    document.getElementById('epCardLabel').textContent = 'エピソードの説明文・目次を貼り付けてください';
+    renderManualInput();
   } finally {
     document.getElementById('btnFetch').disabled = false;
   }
-}
-
-function parseEpisodes(html) {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const result = [];
-  // Spotify for Creatorsのエピソードリンクを抽出
-  const links = doc.querySelectorAll('a[href*="/episodes/"]');
-  const seen = new Set();
-  links.forEach(a => {
-    const href = a.getAttribute('href');
-    if (!href || seen.has(href)) return;
-    seen.add(href);
-    // タイトル抽出
-    const titleEl = a.querySelector('h4, h3, h2, strong') || a;
-    const rawTitle = titleEl.textContent.trim();
-    if (!rawTitle || rawTitle.length < 3) return;
-    // 日付抽出（近くのテキストから）
-    const parent = a.closest('li, article, div') || a.parentElement;
-    const dateMatch = parent ? parent.textContent.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},\s+\d{4}/) : null;
-    const date = dateMatch ? dateMatch[0] : '';
-    // 説明文
-    const descEl = parent ? parent.querySelector('p') : null;
-    const desc = descEl ? descEl.textContent.trim().slice(0, 300) : '';
-    const fullUrl = href.startsWith('http') ? href : 'https://podcasters.spotify.com' + href;
-    result.push({ title: rawTitle, date, desc, url: fullUrl, appleUrl: '' });
-  });
-  return result;
 }
 
 function renderEpisodeList() {
   document.getElementById('epSpin').classList.remove('show');
   const list = document.getElementById('epList');
   list.innerHTML = episodes.map((ep, i) => `
-    <div class="ep-item" data-i="${i}" onclick="selectEpisode(${i})">
-      <span class="ep-num">#${String(episodes.length - i).padStart(3,'0')}</span>
+    <div class="ep-item" data-i="${i}" onclick="selectEp(${i})">
+      <span class="ep-num">${i+1}</span>
       <span class="ep-title">${ep.title}</span>
-      <span class="ep-date">${ep.date}</span>
+      <span class="ep-date">${ep.date}${ep.duration ? ' · '+ep.duration : ''}</span>
     </div>`).join('');
 }
 
-// 手動入力フォールバック
 function renderManualInput() {
   const list = document.getElementById('epList');
   list.innerHTML = `
-    <div style="margin-bottom:12px">
-      <div class="card-label" style="margin-bottom:10px">エピソードの説明文・目次を貼り付けてください</div>
-      <textarea id="manualText" style="width:100%;background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:14px;color:var(--ink);font-family:var(--serif);font-size:14px;line-height:1.7;outline:none;resize:vertical;min-height:140px;transition:border-color .2s" 
-        placeholder="例）【目次】&#10;0:00 バイブコーディングが大流行&#10;1:09 AIにこき使われて悲しかった&#10;..."></textarea>
-      <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
-        <input type="url" id="manualUrl" style="flex:1;background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:9px 12px;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none" placeholder="Apple Podcast URL（任意）"/>
-      </div>
-    </div>`;
-  // 手動モードでは選択を省略して直接解析へ
+    <textarea id="manualText" style="width:100%;background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:14px;color:var(--ink);font-family:var(--serif);font-size:14px;line-height:1.7;outline:none;resize:vertical;min-height:140px;margin-bottom:10px" 
+      placeholder="例）【目次】&#10;0:00 バイブコーディングが大流行&#10;1:09 AIにこき使われて悲しかった&#10;..."></textarea>
+    <input type="url" id="manualUrl" style="width:100%;background:rgba(255,255,255,.6);border:1px solid var(--dust);border-radius:4px;padding:9px 12px;color:var(--ink);font-family:var(--mono);font-size:12px;outline:none" placeholder="Apple Podcast URL（任意）"/>`;
+  document.getElementById('selEp').classList.remove('show');
   document.getElementById('btnAnalyze').disabled = false;
   document.getElementById('btnAnalyze').onclick = analyzeManual;
-  document.getElementById('selectedEp').classList.remove('show');
 }
 
-function selectEpisode(i) {
+function selectEp(i) {
   selectedIdx = i;
-  document.querySelectorAll('.ep-item').forEach((el, j) => el.classList.toggle('selected', j === i));
-  const ep = episodes[i];
-  document.getElementById('selectedTitle').textContent = ep.title;
-  document.getElementById('selectedEp').classList.add('show');
+  document.querySelectorAll('.ep-item').forEach((el,j) => el.classList.toggle('selected', j===i));
+  document.getElementById('selTitle').textContent = episodes[i].title;
+  document.getElementById('selEp').classList.add('show');
   document.getElementById('btnAnalyze').disabled = false;
+  document.getElementById('btnAnalyze').onclick = analyze;
 }
 
-// STEP 3: 解析
 async function analyze() {
   const apiKey = document.getElementById('apiKey').value.trim();
   if (!apiKey) { alert('APIキーを入力してください'); return; }
   if (selectedIdx < 0) return;
-
   const ep = episodes[selectedIdx];
   currentTitle = ep.title;
-  currentAppleUrl = ep.appleUrl || '';
-
+  currentAppleUrl = ep.appleUrl;
   document.getElementById('step2Panel').style.display = 'none';
   document.getElementById('analyzeSpin').classList.add('show');
-  document.getElementById('analyzeSpinSub').textContent = 'エピソードページを取得中...';
   setStep(3);
-
-  // エピソードページから詳細テキストを取得
-  let epContent = ep.desc || ep.title;
-  try {
-    const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(ep.url);
-    const res = await fetch(proxyUrl);
-    if (res.ok) {
-      const json = await res.json();
-      const doc = new DOMParser().parseFromString(json.contents, 'text/html');
-      doc.querySelectorAll('script,style').forEach(el => el.remove());
-      epContent = doc.body ? doc.body.innerText.slice(0, 6000) : epContent;
-    }
-  } catch(e) { /* フォールバック: タイトル+descで解析 */ }
-
-  document.getElementById('analyzeSpinSub').textContent = 'TASSIOが分析中...';
-  await runAnalysis(apiKey, epContent, ep.title, ep.url);
+  // iTunes APIの description には目次が含まれる
+  await runAnalysis(apiKey, `タイトル: ${ep.title}\n配信日: ${ep.date}\n\n${ep.desc}`);
 }
 
 async function analyzeManual() {
@@ -431,28 +365,27 @@ async function analyzeManual() {
   document.getElementById('step2Panel').style.display = 'none';
   document.getElementById('analyzeSpin').classList.add('show');
   setStep(3);
-  await runAnalysis(apiKey, text, currentTitle, currentAppleUrl);
+  await runAnalysis(apiKey, text);
 }
 
-async function runAnalysis(apiKey, content, title, epUrl) {
+async function runAnalysis(apiKey, content) {
+  document.getElementById('analyzeSpinSub').textContent = 'Claude APIで解析中...';
   const prompt = `以下はポッドキャスト「ゆるコンピュータ科学ラジオ」のエピソード情報です。
 
-【エピソード情報】
-${content}
+${content.slice(0, 6000)}
 
 内容理解支援コンテンツをJSON形式で生成してください（JSONのみ、前後テキスト不要）:
-{"episode_title":"${title}","toc":[{"time":"0:00","topic":"トピック名"}],"summary":"400〜600文字の要約。専門知識がない読者向け。","terms":[{"name":"用語","desc":"2〜3文の解説"}],"mermaid":"graph LR または graph TD で概念図（日本語可、15ノード以内）"}`;
+{"episode_title":"エピソードタイトル","toc":[{"time":"0:00","topic":"トピック名"}],"summary":"400〜600文字の要約。専門知識がない読者向け。","terms":[{"name":"用語","desc":"2〜3文の解説"}],"mermaid":"graph LR または graph TD で概念図（日本語可、15ノード以内）"}`;
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,messages:[{role:'user',content:prompt}]})
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2500,messages:[{role:'user',content:prompt}]})
     });
-    if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'API error'); }
+    if (!res.ok) { const e=await res.json(); throw new Error(e.error?.message||'API error'); }
     const data = await res.json();
     const parsed = JSON.parse(data.content[0].text.replace(/```json|```/g,'').trim());
-    if (!currentAppleUrl && epUrl) currentAppleUrl = epUrl;
     document.getElementById('analyzeSpin').classList.remove('show');
     await renderResults(parsed);
   } catch(e) {
@@ -463,7 +396,6 @@ ${content}
   }
 }
 
-// 結果描画
 async function renderResults(data) {
   currentToc = data.toc || [];
   currentTitle = data.episode_title || currentTitle;
@@ -473,19 +405,19 @@ async function renderResults(data) {
 
   // ヘッダー
   const hd = document.createElement('div');
-  hd.className = 'result-header print-hide';
+  hd.className = 'r-header print-hide';
   hd.innerHTML = `<h2>${currentTitle}</h2>
-    <button class="btn btn-ghost" onclick="backToStep1()">← 別のエピソード</button>
+    <button class="btn btn-ghost" onclick="goStep1()">← 別のエピソード</button>
     <button class="btn btn-pdf" onclick="window.print()">⬇ PDF</button>`;
   el.appendChild(hd);
 
-  // 目次 + 深掘りパネル
+  // 目次
   if (currentToc.length > 0) {
     const sec = document.createElement('div'); sec.className = 'rsec';
-    sec.innerHTML = `<div class="sec-title">TABLE OF CONTENTS</div>
+    sec.innerHTML = `<div class="sec-ttl">TABLE OF CONTENTS</div>
       <div class="toc-list" id="tocList">
-        ${currentToc.map((t,i) => `
-          <div class="toc-item" data-i="${i}" onclick="pickTopic(${i})">
+        ${currentToc.map((t,i)=>`
+          <div class="toc-item" onclick="pickTopic(${i})">
             <span class="toc-time">${t.time}</span>
             <span class="toc-text">${t.topic}</span>
           </div>`).join('')}
@@ -495,12 +427,12 @@ async function renderResults(data) {
         <div class="dd-topic" id="ddTopic"></div>
         <div class="card-label">解説レベル</div>
         <div class="lv-row">
-          ${Object.entries(LEVELS).map(([k,v]) => `<button class="lv-btn ${k==='newspaper'?'act':''}" data-lv="${k}" onclick="setLevel('${k}')">${v.label}</button>`).join('')}
+          ${Object.entries(LEVELS).map(([k,v])=>`<button class="lv-btn ${k==='newspaper'?'act':''}" data-lv="${k}" onclick="setLevel('${k}')">${v.label}</button>`).join('')}
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" id="btnDD" onclick="genDD()">✦ 深掘りレポートを生成</button>
         </div>
-        <div class="spin-wrap" id="ddSpin" style="padding:16px">
+        <div class="spin" id="ddSpin" style="padding:14px">
           <div class="dots"><span></span><span></span><span></span></div>
           <div class="spin-sub">GENERATING</div>
         </div>
@@ -512,7 +444,7 @@ async function renderResults(data) {
   // 要約
   if (data.summary) {
     const sec = document.createElement('div'); sec.className = 'rsec';
-    sec.innerHTML = `<div class="sec-title">SUMMARY</div><div class="summary-text">${data.summary}</div>`;
+    sec.innerHTML = `<div class="sec-ttl">SUMMARY</div><div class="summary-txt">${data.summary}</div>`;
     el.appendChild(sec);
   }
 
@@ -520,17 +452,18 @@ async function renderResults(data) {
   if (data.mermaid) {
     const sec = document.createElement('div'); sec.className = 'rsec';
     const cid = 'mc_'+Date.now();
-    sec.innerHTML = `<div class="sec-title">CONCEPT MAP</div>
+    sec.innerHTML = `<div class="sec-ttl">CONCEPT MAP</div>
       <div class="chart-box"><div class="mermaid" id="${cid}">${data.mermaid}</div></div>`;
     el.appendChild(sec);
-    try { await mermaid.run({nodes:[document.getElementById(cid)]}); } catch(e) { document.getElementById(cid).textContent = data.mermaid; }
+    try { await mermaid.run({nodes:[document.getElementById(cid)]}); }
+    catch(e) { document.getElementById(cid).textContent = data.mermaid; }
   }
 
   // 用語
   if (data.terms?.length > 0) {
     const sec = document.createElement('div'); sec.className = 'rsec';
-    sec.innerHTML = `<div class="sec-title">GLOSSARY</div>
-      <div class="term-grid">${data.terms.map(t => `
+    sec.innerHTML = `<div class="sec-ttl">GLOSSARY</div>
+      <div class="term-grid">${data.terms.map(t=>`
         <div class="term-item"><div class="term-name">${t.name}</div><div class="term-desc">${t.desc}</div></div>`).join('')}</div>`;
     el.appendChild(sec);
   }
@@ -542,19 +475,15 @@ async function renderResults(data) {
       <div class="cta-label">NEXT STEP</div>
       <div class="cta-title">「${currentTitle}」<br>を実際に聴いてみませんか？</div>
       <div class="cta-sub">概要がつかめたら、あとは声と空気感だけ。</div>
-      ${currentAppleUrl
-        ? `<a class="cta-link" href="${currentAppleUrl}" target="_blank" rel="noopener">🎧 Apple Podcastで聴く →</a>`
-        : `<a class="cta-link" href="https://podcasts.apple.com/jp/podcast/id1604353315" target="_blank" rel="noopener">🎧 Apple Podcastで聴く →</a>`}
+      <a class="cta-link" href="${currentAppleUrl || 'https://podcasts.apple.com/jp/podcast/id'+PODCAST_ID}" target="_blank" rel="noopener">🎧 Apple Podcastで聴く →</a>
     </div>`;
   el.appendChild(cta);
-
   el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-// 深掘り
 function pickTopic(i) {
   ddTopicIdx = i;
-  document.querySelectorAll('.toc-item').forEach((el,j) => el.classList.toggle('sel', j===i));
+  document.querySelectorAll('.toc-item').forEach((el,j)=>el.classList.toggle('sel',j===i));
   document.getElementById('ddTopic').textContent = `▶ 選択中: ${currentToc[i].time} — ${currentToc[i].topic}`;
   document.getElementById('ddPanel').classList.add('show');
   document.getElementById('ddResult').innerHTML = '';
@@ -563,7 +492,7 @@ function pickTopic(i) {
 
 function setLevel(lv) {
   selectedLevel = lv;
-  document.querySelectorAll('.lv-btn').forEach(b => b.classList.toggle('act', b.dataset.lv===lv));
+  document.querySelectorAll('.lv-btn').forEach(b=>b.classList.toggle('act',b.dataset.lv===lv));
 }
 
 async function genDD() {
@@ -575,13 +504,13 @@ async function genDD() {
   document.getElementById('ddResult').innerHTML = '';
   document.getElementById('btnDD').disabled = true;
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:
         `ポッドキャスト「ゆるコンピュータ科学ラジオ」のエピソード「${currentTitle}」のトピック「${t.topic}」について、${lv.prompt}解説してください。
 <div class="report-body">で囲み、<h3>と<p>のみ使って以下の構成でHTMLフラグメントを出力（他テキスト不要）:
-1. このトピックとは何か / 2. なぜ重要・面白いのか / 3. 具体例・身近なたとえ / 4. まとめ・ポイント
+1.このトピックとは何か / 2.なぜ重要・面白いのか / 3.具体例・身近なたとえ / 4.まとめ・ポイント
 文字数目安: 600〜900文字`}]})
     });
     const d = await res.json();
